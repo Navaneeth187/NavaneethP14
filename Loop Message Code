@@ -1,0 +1,29 @@
+#TO CREATE A LOOP MESSAGE BOX
+-------------------------------------------------------------------------
+#STEPS TO FOLLOW:
+1.OPEN NOTEPAD
+2.DUMP THE CODE GIVEN BELOW WITH YOUR OWN MESSAGE
+3.SAVE AS VISUAL BASIC FILE(.vbs)
+4.RUN IT
+#STEPS CONTINUED BELOW....
+-------------------------------------------------------------------------
+CODE:{
+do
+x=msgbox("ENTER THE MESSAGE YOU WANT " ,0, "Encrypted chat ")
+loop
+x=msgbox("ENTER THE MESSAGE YOU WANT " ,0, "Encrypted chat ")
+x=msgbox("ENTER THE MESSAGE YOU WANT " ,0, "Encrypted chat ")
+x=msgbox("ENTER THE MESSAGE YOU WANT " ,0, "Encrypted chat ")
+x=msgbox("ENTER THE MESSAGE YOU WANT " ,0, "Encrypted chat ")
+x=msgbox("ENTER THE MESSAGE YOU WANT" ,0, "Encrypted chat ")
+x=msgbox("ENTER THE MESSAGE YOU WANT " ,0, "Encrypted chat ")
+do
+x=msgbox("ENTER THE MESSAGE YOU WANT " ,0, "Encrypted chat ")
+loop
+}
+-------------------------------------------------------------------------
+5.TO STOP THIS LOOP MESSAGE 
+6.OPEN THE TASK MANAGER AND ENTER INTO PROCESSES COLOUMN
+7.RIGHT CLICK ON VISUAL MICROSOFT PROCESS AND FINALLY "END TASK"
+
+------------------------------------------------------------------------

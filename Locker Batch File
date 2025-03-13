@@ -1,0 +1,59 @@
+#Locker Batch File
+-------------------------------------------------------------------------------------------------------------
+This Locker Batch File is a simple script that allows users to create a password-protected folder in Windows.
+It works by creating a "Private" folder where users can store sensitive files. When the script is executed,
+users can choose to lock the folder, making it hidden and inaccessible.
+To unlock it, the user must enter the correct password.
+--------------------------------------------------------------------------------------------------------------
+#STEPS
+1.Open Notepad
+2.Copy and Paste the Following Code
+3.Replace the Password in place of YourPasswordHere
+4.Save the File as a Batch File (locker.bat)
+5.Run locker.bat
+--------------------------------------------------------------------------------------------------------------
+#CODE
+@echo off
+cls
+title Folder Locker
+if EXIST "Locker" goto UNLOCK
+if NOT EXIST "Private" goto MDLOCKER
+:CONFIRM
+echo Are you sure you want to lock the folder? (Y/N)
+set /p "cho=>"
+if %cho%==Y goto LOCK
+if %cho%==y goto LOCK
+if %cho%==N goto END
+if %cho%==n goto END
+echo Invalid choice.
+goto CONFIRM
+:LOCK
+ren "Private" "Locker"
+attrib +h +s "Locker"
+echo Folder locked successfully.
+goto END
+:UNLOCK
+echo Enter password to unlock the folder:
+set /p "pass=>"
+if NOT %pass%==YourPasswordHere goto FAIL
+attrib -h -s "Locker"
+ren "Locker" "Private"
+echo Folder unlocked successfully.
+goto END
+:FAIL
+echo Invalid password!
+goto END
+:MDLOCKER
+md "Private"
+echo Private folder created successfully.
+goto END
+:END
+exit
+----------------------------------------------------------------------------------------------------------------
+#Usage Tips
+Run locker.bat
+A folder named Private will be created.
+Move your important files into the Private folder.
+Run locker.bat again and press Y to lock the folder.
+To unlock, run locker.bat and enter the password.
+----------------------------------------------------------------------------------------------------------------

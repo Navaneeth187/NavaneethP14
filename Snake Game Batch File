@@ -1,0 +1,84 @@
+#Snake Game Batch File
+-----------------------------------------------------------------------------------------------------
+Save the Below code as snake.bat in Notepad and run it by double-clicking the file.
+Use W, A, S, D keys to move the snake (O) and eat the food (@).
+The game ends if you hit the wall. Score increases with each food eaten.
+Enjoy your simple Snake game in Batch!
+
+#Steps
+1.Open Notepad
+2.Copy & Save the file as snake.bat
+-----------------------------------------------------------------------------------------------------
+#CODE
+@echo off
+setlocal enabledelayedexpansion
+
+:: Window size setup
+mode con: cols=40 lines=20
+title Snake Game - Batch Script
+
+:: Initialize snake position and direction
+set x=20
+set y=10
+set dir=R
+set score=0
+
+:: Generate random food position
+:GenerateFood
+set /a foodX=%random% %% 38 + 1
+set /a foodY=%random% %% 18 + 1
+
+:: Game loop
+:GameLoop
+cls
+echo Score: %score%
+
+:: Draw game area
+for /l %%i in (1,1,20) do (
+    for /l %%j in (1,1,40) do (
+        if %%i==%y% if %%j==%x% (echo|set /p=O) else if %%i==%foodY% if %%j==%foodX% (echo|set /p=@) else (echo|set /p=.)
+    )
+    echo.
+)
+
+:: Check for collision with food
+if %x%==%foodX% if %y%==%foodY% (
+    set /a score+=1
+    goto GenerateFood
+)
+
+:: Get user input (WASD for movement)
+choice /c WASD /n /t 1 /d %dir% >nul
+if errorlevel 4 set dir=D
+if errorlevel 3 set dir=A
+if errorlevel 2 set dir=S
+if errorlevel 1 set dir=W
+
+:: Update position
+if "%dir%"=="W" set /a y-=1
+if "%dir%"=="S" set /a y+=1
+if "%dir%"=="A" set /a x-=1
+if "%dir%"=="D" set /a x+=1
+
+:: Check for collision with boundary (game over condition)
+if %x% LSS 1 goto GameOver
+if %x% GTR 39 goto GameOver
+if %y% LSS 1 goto GameOver
+if %y% GTR 19 goto GameOver
+
+:: Repeat the game loop
+goto GameLoop
+
+:GameOver
+cls
+echo GAME OVER! Your final score: %score%
+pause
+exit
+-----------------------------------------------------------------------------------------------------
+#Usage Guide
+The script uses simple logic to:
+Move the snake using WASD keys.
+Generate food at random positions.
+Increase the score when the snake eats food.
+End the game if the snake hits the boundary.
+------------------------------------------------------------------------------------------------------

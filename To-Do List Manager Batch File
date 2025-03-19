@@ -1,0 +1,81 @@
+# Simple To-Do List Manager
+-------------------------------------------------------------------------------------------------------------
+This To-Do List Batch File is a simple script that allows users to manage tasks in a text file.  
+Users can add tasks, view all tasks, and delete all tasks easily.  
+The script saves tasks in a `tasks.txt` file and provides a simple menu for interaction.  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`todo.bat`)  
+4. Run `todo.bat`  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE  
+@echo off  
+title Simple To-Do List Manager  
+set "todo_file=tasks.txt"  
+
+:menu  
+cls  
+echo ============================  
+echo       To-Do List Manager    
+echo ============================  
+echo 1. View Tasks  
+echo 2. Add a Task  
+echo 3. Delete All Tasks  
+echo 4. Exit  
+echo ============================  
+set /p choice=Enter your choice (1-4):   
+
+if "%choice%"=="1" goto view_tasks  
+if "%choice%"=="2" goto add_task  
+if "%choice%"=="3" goto delete_tasks  
+if "%choice%"=="4" exit  
+echo Invalid choice! Try again.  
+pause  
+goto menu  
+
+:view_tasks  
+cls  
+echo ===== Your To-Do List =====  
+if exist "%todo_file%" (  
+    type "%todo_file%"  
+) else (  
+    echo No tasks found.  
+)  
+echo ============================  
+pause  
+goto menu  
+
+:add_task  
+cls  
+set /p task=Enter a new task:  
+echo %task% >> "%todo_file%"  
+echo Task added successfully!  
+pause  
+goto menu  
+
+:delete_tasks  
+cls  
+if exist "%todo_file%" (  
+    del "%todo_file%"  
+    echo All tasks deleted!  
+) else (  
+    echo No tasks to delete.  
+)  
+pause  
+goto menu  
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips  
+1. Run `todo.bat`.  
+2. Select an option:  
+   - **1. View Tasks** → Displays all saved tasks.  
+   - **2. Add a Task** → Allows you to enter and save a new task.  
+   - **3. Delete All Tasks** → Clears all tasks.  
+   - **4. Exit** → Closes the program.  
+3. The tasks are saved in `tasks.txt` in the same folder as `todo.bat`.  
+
+--------------------------------------------------------------------------------------------------------------

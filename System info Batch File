@@ -1,0 +1,70 @@
+# System Info Display
+-------------------------------------------------------------------------------------------------------------
+This Batch File script retrieves and displays key system information in Windows.  
+It provides details such as **OS version, computer name, username, IP address, system architecture, and memory usage**.  
+This script is useful for quickly checking system specifications.  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`sysinfo.bat`)  
+4. Run `sysinfo.bat`  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE  
+@echo off  
+title System Information Display  
+cls  
+
+echo ===================================  
+echo      SYSTEM INFORMATION  
+echo ===================================  
+
+:: Display OS Version  
+echo OS Version:  
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version"  
+echo.  
+
+:: Display Computer Name and Username  
+echo Computer Name: %COMPUTERNAME%  
+echo Logged-in User: %USERNAME%  
+echo.  
+
+:: Display IP Address  
+echo IP Address:  
+ipconfig | findstr /C:"IPv4 Address"  
+echo.  
+
+:: Display System Architecture  
+echo System Type:  
+wmic os get osarchitecture  
+echo.  
+
+:: Display Total and Available Memory  
+echo Memory Status:  
+wmic OS get TotalVisibleMemorySize,FreePhysicalMemory  
+echo.  
+
+:: Display Processor Details  
+echo Processor Info:  
+wmic cpu get name  
+echo.  
+
+echo ===================================  
+echo Press any key to exit...  
+pause >nul  
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips  
+1. Run `sysinfo.bat`.  
+2. It will display:  
+   - **OS Version and Name**  
+   - **Computer Name and Logged-in Username**  
+   - **IP Address (IPv4 Address)**  
+   - **System Architecture (32-bit or 64-bit)**  
+   - **Total and Available Memory**  
+   - **Processor Information**  
+3. Press any key to close the window.  
+
+--------------------------------------------------------------------------------------------------------------

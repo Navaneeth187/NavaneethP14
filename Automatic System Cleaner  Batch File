@@ -1,0 +1,58 @@
+# Automatic System Cleaner  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script helps clean up **temporary files, cache, and unnecessary system files** to free up space.  
+It removes files from the **Temp folder, Windows Prefetch, and Recycle Bin** to improve system performance.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`cleaner.bat`)  
+4. Run `cleaner.bat` as Administrator  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Automatic System Cleaner  
+cls  
+
+echo ===================================  
+echo        SYSTEM CLEANER  
+echo ===================================  
+echo Deleting temporary files...  
+del /s /f /q "%temp%\*" >nul 2>&1  
+rd /s /q "%temp%" >nul 2>&1  
+md "%temp%" >nul 2>&1  
+echo Temp files cleaned!  
+echo.  
+
+echo Deleting Windows Prefetch files...  
+del /s /f /q "C:\Windows\Prefetch\*" >nul 2>&1  
+echo Prefetch files cleaned!  
+echo.  
+
+echo Emptying Recycle Bin...  
+rd /s /q C:\$Recycle.Bin >nul 2>&1  
+echo Recycle Bin emptied!  
+echo.  
+
+echo Cleaning unnecessary system files...  
+cleanmgr /sagerun:1  
+echo Disk Cleanup executed!  
+echo.  
+
+echo ===================================  
+echo Cleanup complete! Press any key to exit...  
+pause >nul  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run `cleaner.bat` **as Administrator**.  
+2. The script will:  
+   - **Delete temporary files** (`%temp%`).  
+   - **Clear Windows Prefetch folder**.  
+   - **Empty the Recycle Bin**.  
+   - **Run Disk Cleanup (`cleanmgr`)** for deeper cleaning.  
+3. Run this script regularly to keep your system clean and fast.  
+
+--------------------------------------------------------------------------------------------------------------

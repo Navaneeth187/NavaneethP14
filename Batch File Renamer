@@ -1,0 +1,45 @@
+# File Renamer  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script allows users to **rename all files of a specific type** in a folder.  
+Users can choose a file extension (e.g., `.txt`) and add a custom suffix or prefix to all matching files.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`renamer.bat`)  
+4. Place `renamer.bat` in the folder where you want to rename files  
+5. Run `renamer.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title File Renamer  
+cls  
+
+echo ===================================  
+echo         FILE RENAMER  
+echo ===================================  
+
+:: Ask for file extension  
+set /p ext=Enter the file extension (e.g., txt, jpg, pdf):  
+set /p suffix=Enter the suffix to add (e.g., _backup):  
+
+:: Rename all matching files  
+for %%f in (*.%ext%) do ren "%%f" "%%~nf%suffix%.%%~xf"  
+
+echo.  
+echo Files renamed successfully!  
+echo ===================================  
+pause  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Place `renamer.bat` inside the folder containing the files you want to rename.  
+2. Run `renamer.bat`.  
+3. Enter the **file extension** (e.g., `txt`).  
+4. Enter the **suffix** to add (e.g., `_backup`).  
+5. All matching files will be renamed (e.g., `document.txt` → `document_backup.txt`).  
+6. Press any key to exit.  
+
+--------------------------------------------------------------------------------------------------------------

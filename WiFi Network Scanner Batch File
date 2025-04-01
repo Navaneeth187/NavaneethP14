@@ -1,0 +1,45 @@
+# WiFi Network Scanner  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script lists all saved WiFi networks on a Windows PC along with their passwords.  
+It retrieves stored network profiles and extracts the corresponding passwords if available.  
+This is useful for recovering forgotten WiFi passwords.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`wifi_scanner.bat`)  
+4. Run `wifi_scanner.bat` **as Administrator**  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title WiFi Network Scanner  
+cls  
+
+echo ===================================  
+echo       SAVED WIFI NETWORKS  
+echo ===================================  
+
+:: Show all saved WiFi profiles  
+echo Listing all saved WiFi networks...  
+netsh wlan show profiles  
+
+echo.  
+set /p network=Enter the WiFi network name to reveal its password:  
+
+:: Display the password for the selected network  
+netsh wlan show profile name="%network%" key=clear | findstr "Key Content"  
+
+echo ===================================  
+pause  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run `wifi_scanner.bat` **as Administrator**.  
+2. The script will display **all saved WiFi network names**.  
+3. Enter the WiFi name to **reveal its password**.  
+4. The password will be shown under **"Key Content"**.  
+5. Press any key to exit.  
+
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,40 @@
+# PC Usage Timer  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script helps you find out how long your PC has been running by checking the **last boot time**.  
+It uses the `systeminfo` command to retrieve system details and extracts the **System Boot Time**.  
+This is useful to monitor uptime or check how long the system has been in use.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`uptime.bat`)  
+4. Run `uptime.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title PC Usage Timer  
+cls  
+
+echo ===================================  
+echo         PC USAGE TIMER  
+echo ===================================  
+echo Fetching system boot time...  
+echo.  
+
+systeminfo | find "System Boot Time"  
+
+echo.  
+echo ===================================  
+pause  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run `uptime.bat`.  
+2. It will display the **System Boot Time** (the last time your PC was turned on or restarted).  
+3. Use this info to calculate how long the PC has been running.  
+4. You can run this script anytime to monitor your PC uptime.  
+5. Press any key to exit.  
+
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,40 @@
+# Fake Error Message Prank  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script displays a **custom error message** in a pop-up window to prank users.  
+It uses the `msg` command to send a message to the screen, simulating a fake system warning or error.  
+This is a harmless and fun way to **fool your friends or coworkers** for a laugh. 😄  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`error_prank.bat`)  
+4. Run `error_prank.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title System Alert  
+cls  
+
+echo ===================================  
+echo       FAKE ERROR MESSAGE PRANK  
+echo ===================================  
+echo Displaying fake system message...  
+echo.  
+
+msg * "⚠ System Error: Critical update failed. Please restart your PC immediately!"  
+
+echo Message sent successfully!  
+echo ===================================  
+pause  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run `error_prank.bat`.  
+2. A pop-up window will appear with the **custom error message**.  
+3. You can modify the message inside the `msg *` line to anything you want.  
+4. Useful for funny pranks – just make sure it's all in good fun! 😁  
+5. Press any key to exit after the message is displayed.  
+
+--------------------------------------------------------------------------------------------------------------

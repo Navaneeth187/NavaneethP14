@@ -1,0 +1,45 @@
+# Internet Speed Tester  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script opens your **default web browser** to a popular speed test site  
+and logs the **date and time** when the test was launched.  
+It's a quick way to check your internet speed and keep track of when you ran the test.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`internet_speed_test.bat`)  
+4. Run `internet_speed_test.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Internet Speed Tester  
+cls  
+
+:: Set log file path  
+set "logFile=%USERPROFILE%\speedtest_log.txt"  
+
+:: Open Speedtest.net in default browser  
+start https://www.speedtest.net  
+
+:: Log the current date and time  
+echo Speed test launched at %date% %time% >> "%logFile%"  
+
+echo =========================================  
+echo Internet Speed Test Launched Successfully  
+echo A log entry has been saved to:  
+echo %logFile%  
+echo =========================================  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. When run, this script opens **Speedtest.net** in your default browser.  
+2. It also creates or updates a log file at `%USERPROFILE%\speedtest_log.txt`.  
+3. You can check the log to see the **history of when** you tested your speed.  
+4. Modify the URL if you prefer a different testing site (e.g., fast.com).  
+
+--------------------------------------------------------------------------------------------------------------

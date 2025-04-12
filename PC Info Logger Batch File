@@ -1,0 +1,60 @@
+# PC Info Logger  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script collects and logs detailed **system information** including  
+CPU, RAM, OS version, hostname, and more to a text file for later reference.  
+It uses built-in Windows commands like `systeminfo`, `hostname`, and `wmic`.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`pc_info_logger.bat`)  
+4. Run `pc_info_logger.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title PC Info Logger  
+cls  
+
+:: Set log file path  
+set "logFile=%USERPROFILE%\pc_info_log.txt"  
+
+echo =========================================== >> "%logFile%"  
+echo       SYSTEM INFORMATION REPORT             >> "%logFile%"  
+echo Date: %date%  Time: %time%                  >> "%logFile%"  
+echo =========================================== >> "%logFile%"  
+
+:: Log basic system info  
+echo Hostname: %COMPUTERNAME%                   >> "%logFile%"  
+echo Username: %USERNAME%                       >> "%logFile%"  
+echo.                                           >> "%logFile%"  
+
+:: Detailed info using systeminfo  
+echo ---------- SYSTEMINFO OUTPUT ----------     >> "%logFile%"  
+systeminfo | findstr /V /C:"Hotfix" >> "%logFile%"  
+echo.                                           >> "%logFile%"  
+
+:: CPU info  
+echo ---------- CPU INFORMATION ----------       >> "%logFile%"  
+wmic cpu get name >> "%logFile%"  
+echo.                                           >> "%logFile%"  
+
+:: RAM info  
+echo ---------- RAM INFORMATION ----------       >> "%logFile%"  
+wmic memorychip get capacity >> "%logFile%"  
+echo.                                           >> "%logFile%"  
+
+echo PC Information logged to: %logFile%  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run the script to instantly collect and log your PC's key hardware and system details.  
+2. The log file will be saved at: `%USERPROFILE%\pc_info_log.txt`.  
+3. Useful for tracking hardware specs, troubleshooting, or system audits.  
+4. You can modify the script to include more `wmic` details like disk drives or GPU.  
+
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,46 @@
+# Disk Space Checker  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script displays the **available free space** on all the drives in your PC.  
+It uses `wmic logicaldisk` to pull data about disk size, free space, and drive labels.  
+Quick and helpful for checking available storage at a glance.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`disk_space_checker.bat`)  
+4. Run `disk_space_checker.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Disk Space Checker  
+cls  
+
+echo ==================================================  
+echo        AVAILABLE DISK SPACE ON ALL DRIVES         
+echo ==================================================  
+echo.  
+
+:: Using WMIC to list disk info  
+wmic logicaldisk get name,freespace,size,volumename  
+
+echo.  
+echo ==================================================  
+echo Note: Sizes are in bytes. To convert:  
+echo - 1 KB = 1024 bytes  
+echo - 1 MB = 1024 KB  
+echo - 1 GB = 1024 MB  
+echo.  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run the script to see all available drives with their total and free space.  
+2. The `wmic` command provides info in bytes — you can modify it to calculate in GB.  
+3. Useful for storage management, cleanup planning, or just checking free space.  
+4. For more detailed output, add formatting or convert values using PowerShell or VBScript.  
+
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,49 @@
+# Daily Journal Logger  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script allows the user to **write daily journal entries**, which get saved  
+in a text file named with the current date.  
+Great for habit tracking, thoughts, reminders, or to-do lists.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`journal_logger.bat`)  
+4. Run `journal_logger.bat` whenever you want to add a journal entry  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Daily Journal Logger  
+cls  
+
+:: Get today's date and format it as YYYY-MM-DD  
+for /f "tokens=2 delims==" %%I in ('"wmic os get LocalDateTime /value"') do set dt=%%I  
+set today=%dt:~0,4%-%dt:~4,2%-%dt:~6,2%  
+
+:: Define journal file path  
+set "journalFile=%USERPROFILE%\Documents\Journal_%today%.txt"  
+
+:: Prompt user for entry  
+echo ================================================  
+echo          DAILY JOURNAL LOGGER - %today%  
+echo ================================================  
+set /p "entry=Write your journal entry: "  
+
+:: Append entry to file  
+echo [%time%] %entry% >> "%journalFile%"  
+
+echo.  
+echo Entry saved to: %journalFile%  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Each time you run this script, it will prompt you for a new journal entry.  
+2. Your entry is saved with a timestamp to a dated journal file (e.g., `Journal_2025-04-11.txt`).  
+3. All entries for the same day go into the same file.  
+4. You can review or edit your journals anytime from your **Documents** folder.  
+
+--------------------------------------------------------------------------------------------------------------

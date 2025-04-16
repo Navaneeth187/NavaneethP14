@@ -1,0 +1,60 @@
+# Folder Size Analyzer  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script analyzes a given directory and calculates the **total size of each folder** inside it.  
+It uses a combination of `for /d` and `dir /s` to recursively gather size data.  
+Perfect for identifying space-hogging folders during cleanup.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Change the folder path in `set targetDir=` to the directory you want to scan  
+4. Save the file as a Batch File (`folder_size_analyzer.bat`)  
+5. Run `folder_size_analyzer.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Folder Size Analyzer  
+cls  
+
+:: Set the target directory to analyze  
+set "targetDir=C:\Users\%USERNAME%\Documents"  
+
+:: Set output file path  
+set "outputFile=%USERPROFILE%\Documents\folder_sizes_report.txt"  
+
+:: Start logging  
+echo ================================================== > "%outputFile%"  
+echo        FOLDER SIZE REPORT - %date% %time%          >> "%outputFile%"  
+echo ================================================== >> "%outputFile%"  
+echo. >> "%outputFile%"  
+
+:: Loop through each folder and get its size  
+for /d %%F in ("%targetDir%\*") do (  
+    set "folder=%%F"  
+    call :GetSize "%%F"  
+)  
+
+echo Done! Folder size report saved to: %outputFile%  
+pause  
+exit  
+
+:GetSize  
+setlocal  
+set "folderPath=%~1"  
+for /f "tokens=3" %%A in ('dir /s "%folderPath%" ^| find "File(s)"') do (  
+    echo %folderPath% - %%A Bytes >> "%outputFile%"  
+)  
+endlocal  
+goto :eof  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Set the `targetDir` variable to the path you want to analyze.  
+2. The script generates a `folder_sizes_report.txt` file in your Documents folder.  
+3. The sizes are displayed in **bytes**; you can convert them into MB/GB manually if needed.  
+4. Great for cleaning out bulky folders and managing disk space.  
+
+--------------------------------------------------------------------------------------------------------------

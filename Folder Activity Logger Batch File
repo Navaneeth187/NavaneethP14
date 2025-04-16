@@ -1,0 +1,60 @@
+# Folder Activity Logger  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script monitors a specific folder and logs the **last modified timestamp**  
+whenever the script is run.  
+It uses `dir` and `findstr` to check and store the modification details for tracking activity.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Replace the folder path in `set folderPath=` with your desired folder  
+4. Save the file as a Batch File (`folder_activity_logger.bat`)  
+5. Run `folder_activity_logger.bat` anytime to log changes  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Folder Activity Logger  
+cls  
+
+:: Set folder to monitor (change this to your target folder)  
+set "folderPath=C:\Users\%USERNAME%\Documents\TestFolder"  
+
+:: Set log file path  
+set "logFile=%USERPROFILE%\Documents\folder_activity_log.txt"  
+
+:: Create header in log file if it doesn't exist  
+if not exist "%logFile%" (  
+    echo ====== Folder Activity Log ====== > "%logFile%"  
+)
+
+:: Get date/time  
+for /f "tokens=2 delims==" %%I in ('"wmic os get LocalDateTime /value"') do set dt=%%I  
+set "timestamp=%dt:~0,4%-%dt:~4,2%-%dt:~6,2% %dt:~8,2%:%dt:~10,2%:%dt:~12,2%"  
+
+:: Get last modified time of the folder  
+for /f "tokens=1-3*" %%a in ('dir "%folderPath%" ^| findstr /I /C:"%~nx0"') do (  
+    set "modified=%%a %%b %%c"  
+)
+
+:: Log folder activity  
+echo [%timestamp%] Checked folder: %folderPath% >> "%logFile%"  
+echo Last Modified: %modified% >> "%logFile%"  
+echo. >> "%logFile%"  
+
+:: Notify user  
+echo Folder modification timestamp logged.  
+echo Log File: %logFile%  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Replace the folder path with the directory you want to monitor.  
+2. Each time you run the script, it logs the time it was run and the last modification timestamp.  
+3. The log file is saved in your Documents folder (`folder_activity_log.txt`).  
+4. You can turn this into a scheduled task to monitor the folder at regular intervals.  
+
+--------------------------------------------------------------------------------------------------------------

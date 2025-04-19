@@ -1,0 +1,53 @@
+# IP & Network Monitor  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script displays your **private IP**, **public IP**, **default gateway**, and **DNS servers**.  
+It uses commands like `ipconfig`, `nslookup`, and `findstr` for quick diagnostics.  
+Very handy for troubleshooting or checking network details on the fly.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`ip_network_monitor.bat`)  
+4. Run `ip_network_monitor.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title IP & Network Monitor  
+cls  
+
+echo ==================================================  
+echo        IP & NETWORK MONITOR - NETWORK DETAILS      
+echo ==================================================  
+echo.  
+
+:: Show Private IP and Gateway  
+echo [Private IP Address and Gateway]  
+ipconfig | findstr /i "IPv4 Default"  
+echo.  
+
+:: Show DNS Servers  
+echo [DNS Servers]  
+ipconfig /all | findstr /i "DNS Servers"  
+echo.  
+
+:: Show Public IP using nslookup (Google DNS trick)  
+echo [Public IP Address]  
+nslookup myip.opendns.com resolver1.opendns.com | findstr /i "Address"  
+echo.  
+
+echo ==================================================  
+echo Info displayed successfully.  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. This script gives both **internal (local)** and **external (public)** IP addresses.  
+2. It also lists DNS servers and the default gateway.  
+3. Make sure you have an active internet connection to fetch public IP via `nslookup`.  
+4. You can enhance this by logging results to a file or running it at boot.  
+
+--------------------------------------------------------------------------------------------------------------

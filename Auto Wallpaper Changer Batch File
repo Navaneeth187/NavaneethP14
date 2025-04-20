@@ -1,0 +1,52 @@
+# Auto Wallpaper Changer  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script changes your desktop wallpaper **randomly from a folder of images**.  
+It uses simple batch commands in combination with the Windows Registry and PowerShell  
+to automate wallpaper rotation — perfect for keeping your desktop fresh and aesthetic!  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Create a folder and place your wallpaper images inside (e.g., `C:\Wallpapers`)  
+2. Open Notepad  
+3. Copy and Paste the Following Code  
+4. Replace the image folder path in `set "wallpaperFolder="`  
+5. Save the file as a Batch File (`auto_wallpaper_changer.bat`)  
+6. Run the batch file to change your wallpaper  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Auto Wallpaper Changer  
+cls  
+
+:: Set the folder where your wallpapers are stored  
+set "wallpaperFolder=C:\Wallpapers"
+
+:: Get a random wallpaper from the folder  
+for /f "delims=" %%A in ('dir /b /a:-d "%wallpaperFolder%\*.jpg" "%wallpaperFolder%\*.png" ^| sort /R') do (  
+    set "randomWallpaper=%%A"  
+    goto :setwallpaper  
+)  
+
+:setwallpaper  
+:: Use PowerShell to set the wallpaper  
+powershell -command ^ 
+"(Add-Type -MemberDefinition '  
+[DllImport(\"user32.dll\")]  
+public static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);  
+' -Name NativeMethods -Namespace Win32 -PassThru)::SystemParametersInfo(20, 0, '%wallpaperFolder%\%randomWallpaper%', 3)"  
+
+echo.  
+echo Wallpaper changed to: %randomWallpaper%  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Add as a scheduled task to run daily or at login for automatic wallpaper refresh.  
+2. Supports `.jpg` and `.png` files — add more extensions if needed.  
+3. Make sure your folder path does not contain spaces unless enclosed in quotes.  
+4. You can customize it further to exclude certain files or display image previews before applying.  
+
+--------------------------------------------------------------------------------------------------------------

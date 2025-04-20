@@ -1,0 +1,42 @@
+# Recycle Bin Auto-Cleaner  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script automatically **empties the Recycle Bin** when executed.  
+It's a simple way to regularly clear junk and free up disk space without manual steps.  
+Ideal for system maintenance or adding to startup tasks.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`recycle_bin_cleaner.bat`)  
+4. Right-click and Run as Administrator  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Recycle Bin Auto-Cleaner  
+cls  
+
+echo ==========================================  
+echo        RECYCLE BIN AUTO-CLEANER           
+echo ==========================================  
+echo.  
+echo Cleaning Recycle Bin...  
+
+:: Use PowerShell to empty the Recycle Bin  
+powershell -command "Clear-RecycleBin -Force"  
+
+echo.  
+echo Recycle Bin emptied successfully.  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Requires Administrator privileges for full access to the Recycle Bin.  
+2. You can add this script to Windows Task Scheduler to run it automatically at boot or weekly.  
+3. Helpful for keeping your system clean and maintaining storage space.  
+4. Can be combined with other system cleaner scripts for a full maintenance batch tool.  
+
+--------------------------------------------------------------------------------------------------------------

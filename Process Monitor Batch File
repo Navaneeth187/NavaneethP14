@@ -1,0 +1,72 @@
+# Process Monitor  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script lists all currently running processes on your system or monitors for a specific process name.  
+You can use it to quickly check if an app is running or track process activity in real time.  
+Helpful for basic task management or lightweight system diagnostics.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. (Optional) Replace `notepad.exe` with the process name you want to monitor  
+4. Save the file as a Batch File (`process_monitor.bat`)  
+5. Run `process_monitor.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Process Monitor  
+cls  
+
+echo ===============================  
+echo       PROCESS MONITOR          
+echo ===============================  
+echo.  
+
+:: Ask the user to choose mode  
+echo 1. List all running processes  
+echo 2. Monitor a specific process  
+set /p "choice=Enter your choice (1 or 2): "  
+
+if "%choice%"=="1" goto LIST  
+if "%choice%"=="2" goto MONITOR  
+echo Invalid choice. Exiting...  
+goto END  
+
+:LIST  
+echo.  
+echo Listing all running processes...  
+echo.  
+tasklist  
+goto END  
+
+:MONITOR  
+set /p "pname=Enter the process name to monitor (e.g., notepad.exe): "  
+echo.  
+echo Monitoring for process: %pname%  
+echo Press Ctrl+C to stop monitoring.  
+echo.  
+
+:LOOP  
+tasklist | find /i "%pname%" >nul  
+if %errorlevel%==0 (  
+    echo [%time%] %pname% is RUNNING  
+) else (  
+    echo [%time%] %pname% is NOT running  
+)  
+timeout /t 5 >nul  
+goto LOOP  
+
+:END  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Option 1 lists all current processes, similar to Task Manager.  
+2. Option 2 continuously checks if a specific process is running every 5 seconds.  
+3. You can change the interval by modifying the `timeout` value.  
+4. Useful for monitoring background apps or ensuring a program stays active.  
+
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,55 @@
+# Battery Health Checker  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script generates a **detailed battery health report** using Windows’ built-in `powercfg /batteryreport` command.  
+The report provides insights like design capacity vs. full charge capacity, battery usage, charge cycles, and more.  
+Perfect for laptops to track battery wear and overall performance.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`battery_health_checker.bat`)  
+4. Right-click and Run as Administrator (required)  
+5. View the generated report in HTML format  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Battery Health Checker  
+cls  
+
+echo =====================================  
+echo        BATTERY HEALTH CHECKER        
+echo =====================================  
+echo.  
+echo Generating battery report...  
+echo Please wait...  
+echo.  
+
+:: Set output path (you can customize this path)  
+set "reportPath=%USERPROFILE%\Desktop\battery-report.html"  
+
+:: Run powercfg to generate report  
+powercfg /batteryreport /output "%reportPath%" >nul  
+
+if exist "%reportPath%" (  
+    echo Battery report generated successfully!  
+    echo Report saved at: %reportPath%  
+    start "" "%reportPath%"  
+) else (  
+    echo Failed to generate report. Make sure you run this script as Administrator.  
+)  
+
+echo.  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. The report is saved to your **Desktop** by default — you can change the path in the script.  
+2. Run the script every few weeks to monitor battery health trends.  
+3. Open the HTML file in any browser to read the full details (Design Capacity, Cycle Count, etc.).  
+4. Useful for detecting early signs of battery degradation on laptops.  
+
+--------------------------------------------------------------------------------------------------------------

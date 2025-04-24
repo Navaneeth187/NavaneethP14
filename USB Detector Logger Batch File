@@ -1,0 +1,68 @@
+# USB Detector Logger  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script **detects when a USB device is plugged in or removed** and logs the **date/time of the event**.  
+It uses built-in Windows tools like `wmic` to scan for USB devices in intervals and detects changes.  
+Great for monitoring USB activity for security or personal logging purposes.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`usb_logger.bat`)  
+4. Run as Administrator (recommended)  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title USB Detector Logger  
+setlocal enabledelayedexpansion  
+cls  
+
+:: Initialize  
+set "logfile=usb_log.txt"  
+set "lastSnapshot=usb_prev.txt"  
+set "interval=10"  
+
+:: Create initial snapshot  
+wmic logicaldisk where "drivetype=2" get deviceid > "%lastSnapshot%"  
+
+echo ================================
+echo      USB DETECTOR LOGGER       
+echo ================================
+echo.  
+echo Monitoring for USB device changes every %interval% seconds...  
+echo Log file: %logfile%  
+echo Press Ctrl+C to stop  
+echo.  
+
+:loop  
+:: Capture current USB drives  
+wmic logicaldisk where "drivetype=2" get deviceid > usb_now.txt  
+
+:: Compare current vs previous snapshot  
+fc usb_now.txt %lastSnapshot% >nul  
+if errorlevel 1 (  
+    echo [%date% %time%] Change Detected >> %logfile%  
+    echo   - USB status changed. >> %logfile%  
+    type usb_now.txt >> %logfile%  
+    echo. >> %logfile%  
+    copy /y usb_now.txt %lastSnapshot% >nul  
+    echo USB event logged at %time%  
+)  
+
+timeout /t %interval% >nul  
+goto loop  
+
+:end  
+endlocal  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run this script in the background to monitor USB insert/removal events.  
+2. The log file `usb_log.txt` will contain timestamps and USB device changes.  
+3. You can increase the check interval by changing the `set interval=` value.  
+4. Ideal for monitoring in labs, schools, or shared computers.  
+
+--------------------------------------------------------------------------------------------------------------

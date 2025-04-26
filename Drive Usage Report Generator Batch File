@@ -1,0 +1,57 @@
+# Drive Usage Report Generator  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script **displays information about all drives**:  
+Drive name, total space, used space, and free space.  
+It uses the `wmic logicaldisk` command to gather details.  
+Helpful for monitoring storage status and finding space-hungry drives easily.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`drive_usage_report.bat`)  
+4. Run the batch file normally  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Drive Usage Report Generator  
+cls  
+
+echo =========================================  
+echo         DRIVE USAGE REPORT              
+echo =========================================  
+echo.  
+
+:: Display drive details  
+for /f "skip=1 tokens=1,2,3*" %%A in ('wmic logicaldisk get name,size,freespace 2^>nul') do (  
+    if not "%%A"=="" (  
+        set "drive=%%A"  
+        set "free=%%B"  
+        set "size=%%C"  
+
+        set /a freeMB=!free:~0,-6!  
+        set /a sizeMB=!size:~0,-6!  
+        set /a usedMB=!sizeMB!-!freeMB!
+
+        echo Drive: !drive!  
+        echo   Total Size : !sizeMB! MB  
+        echo   Used Space : !usedMB! MB  
+        echo   Free Space : !freeMB! MB  
+        echo -------------------------------  
+    )  
+)  
+
+echo.  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Displays the size in **MB** (megabytes) for quick viewing.  
+2. You can modify the script to show sizes in **GB** by dividing by 1024.  
+3. Useful for quick health-checks before installing large software or games.  
+4. Works on all Windows versions without needing external tools.  
+
+--------------------------------------------------------------------------------------------------------------

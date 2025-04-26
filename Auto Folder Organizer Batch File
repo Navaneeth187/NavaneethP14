@@ -1,0 +1,86 @@
+# Auto Folder Organizer  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script automatically **sorts files into folders based on their file types** (like Images, Documents, Videos, etc.).  
+It helps in cleaning up messy directories by moving files into organized folders.  
+Perfect for quickly arranging downloads, desktop files, or any cluttered folder.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as a Batch File (`auto_folder_organizer.bat`)  
+4. Place the batch file inside the folder you want to organize  
+5. Run `auto_folder_organizer.bat`  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Auto Folder Organizer  
+cls  
+
+echo ======================================  
+echo         AUTO FOLDER ORGANIZER         
+echo ======================================  
+echo.  
+
+:: Create folders if they don't exist  
+if not exist "Images" mkdir Images  
+if not exist "Documents" mkdir Documents  
+if not exist "Videos" mkdir Videos  
+if not exist "Music" mkdir Music  
+if not exist "Archives" mkdir Archives  
+if not exist "Programs" mkdir Programs  
+if not exist "Others" mkdir Others  
+
+:: Move files based on extension  
+echo Organizing files...  
+
+move *.jpg Images >nul 2>&1  
+move *.jpeg Images >nul 2>&1  
+move *.png Images >nul 2>&1  
+move *.gif Images >nul 2>&1  
+move *.bmp Images >nul 2>&1  
+
+move *.doc Documents >nul 2>&1  
+move *.docx Documents >nul 2>&1  
+move *.pdf Documents >nul 2>&1  
+move *.txt Documents >nul 2>&1  
+move *.ppt Documents >nul 2>&1  
+move *.pptx Documents >nul 2>&1  
+move *.xls Documents >nul 2>&1  
+move *.xlsx Documents >nul 2>&1  
+
+move *.mp4 Videos >nul 2>&1  
+move *.mkv Videos >nul 2>&1  
+move *.avi Videos >nul 2>&1  
+move *.mov Videos >nul 2>&1  
+
+move *.mp3 Music >nul 2>&1  
+move *.wav Music >nul 2>&1  
+
+move *.zip Archives >nul 2>&1  
+move *.rar Archives >nul 2>&1  
+move *.7z Archives >nul 2>&1  
+
+move *.exe Programs >nul 2>&1  
+move *.msi Programs >nul 2>&1  
+
+:: Move anything else to "Others"  
+for %%f in (*) do (  
+    if not "%%~xf"=="" move "%%f" Others >nul 2>&1  
+)
+
+echo.  
+echo Files organized successfully!  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. You can add more extensions by modifying or adding move commands.  
+2. Place this batch file inside any folder you want to organize before running it.  
+3. Files that don’t match predefined types are moved into the "Others" folder.  
+4. Very useful for managing Downloads, Desktop, or project folders.  
+
+--------------------------------------------------------------------------------------------------------------

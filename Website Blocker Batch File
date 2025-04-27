@@ -1,0 +1,50 @@
+# Website Blocker  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script **blocks access to specific websites** by modifying the Windows `hosts` file.  
+It redirects the domains to `127.0.0.1`, making them inaccessible from any browser.  
+Very useful for **parental control**, **study-time focus**, or **learning about network management**.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad **as Administrator** (important to edit system files).  
+2. Copy and Paste the Following Code.  
+3. Save the file as a Batch File (`website_blocker.bat`).  
+4. Right-click and Run `website_blocker.bat` as Administrator.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Website Blocker  
+cls  
+
+echo ======================================  
+echo         WEBSITE BLOCKER               
+echo ======================================  
+echo.  
+
+:: Ask the user for the website to block  
+set /p site="Enter the website you want to block (example: www.youtube.com): "  
+
+:: Backup the hosts file first  
+copy %SystemRoot%\System32\drivers\etc\hosts %SystemRoot%\System32\drivers\etc\hosts.bak >nul 2>&1  
+
+:: Append blocking entry  
+echo 127.0.0.1 %site% >> %SystemRoot%\System32\drivers\etc\hosts  
+
+echo.  
+echo Successfully blocked: %site%  
+echo A backup of your original hosts file was created as 'hosts.bak'.  
+echo.  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Always **run the batch file as Administrator** — normal users can't modify the hosts file.  
+2. To unblock a website, **open the hosts file manually** and **delete the added line**.  
+3. Make sure to **clear browser cache** after blocking for immediate effect.  
+4. Very effective for blocking distractions like `facebook.com`, `youtube.com`, etc., during study hours!  
+5. Be careful — wrong edits to the hosts file can cause internet access issues. Backup is auto-created.  
+
+--------------------------------------------------------------------------------------------------------------

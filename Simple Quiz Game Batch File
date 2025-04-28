@@ -1,0 +1,90 @@
+# Simple Quiz Game  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script creates a **basic quiz game** that asks a few questions to the user.  
+It checks the user's answers, gives feedback immediately, and calculates the final score.  
+Perfect for learning how user input and decision-making work in batch scripting!  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad.  
+2. Copy and Paste the Following Code.  
+3. Save the file as a Batch File (`quiz_game.bat`).  
+4. Run the batch file and play the quiz!  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Simple Quiz Game  
+cls  
+
+set /a score=0  
+
+echo =====================================  
+echo         WELCOME TO THE QUIZ           
+echo =====================================  
+echo.  
+
+:: Question 1  
+echo Q1) What is the capital of France?  
+echo a) Berlin  
+echo b) Madrid  
+echo c) Paris  
+echo d) Rome  
+set /p answer1="Your Answer (a/b/c/d): "  
+if /i "%answer1%"=="c" (  
+    echo Correct!  
+    set /a score+=1  
+) else (  
+    echo Wrong! The correct answer is c) Paris.  
+)  
+echo.  
+
+:: Question 2  
+echo Q2) How many continents are there?  
+echo a) 5  
+echo b) 6  
+echo c) 7  
+echo d) 8  
+set /p answer2="Your Answer (a/b/c/d): "  
+if /i "%answer2%"=="c" (  
+    echo Correct!  
+    set /a score+=1  
+) else (  
+    echo Wrong! The correct answer is c) 7.  
+)  
+echo.  
+
+:: Question 3  
+echo Q3) What is the chemical symbol for water?  
+echo a) CO2  
+echo b) H2O  
+echo c) NaCl  
+echo d) O2  
+set /p answer3="Your Answer (a/b/c/d): "  
+if /i "%answer3%"=="b" (  
+    echo Correct!  
+    set /a score+=1  
+) else (  
+    echo Wrong! The correct answer is b) H2O.  
+)  
+echo.  
+
+:: Final score  
+echo =====================================  
+echo          QUIZ COMPLETED              
+echo =====================================  
+echo Your total score is: %score% out of 3  
+echo.  
+
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. You can **add more questions** by copying the format of the existing ones.  
+2. **/i** in `if /i` means case-insensitive comparison (so "C" and "c" both are accepted).  
+3. Great for small quizzes, exams, study games, and fun projects!  
+4. You can even **randomize questions** later for a more advanced version.  
+
+--------------------------------------------------------------------------------------------------------------

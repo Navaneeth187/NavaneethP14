@@ -1,0 +1,55 @@
+# Colorful Text Banner  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File displays a **colorful, eye-catching ASCII banner** in the Command Prompt.  
+It uses ANSI escape codes (via `echo`) to change text color and formatting.  
+Great for adding visual flair to your batch scripts or just experimenting with terminal styles!  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad.  
+2. Copy and Paste the Following Code.  
+3. Save the file as a Batch File (`color_banner.bat`).  
+4. Run the file and enjoy the colorful output.  
+5. Works best on Windows 10/11 where ANSI colors are supported by default.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+cls  
+:: Enable virtual terminal processing for ANSI support  
+reg query HKCU\Console /v VirtualTerminalLevel >nul 2>&1  
+if errorlevel 1 (  
+    reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1 /f >nul  
+)  
+
+:: Define colors using ANSI escape codes  
+set "RED=[91m"  
+set "GREEN=[92m"  
+set "YELLOW=[93m"  
+set "BLUE=[94m"  
+set "MAGENTA=[95m"  
+set "CYAN=[96m"  
+set "RESET=[0m"  
+
+:: Print the banner  
+echo.  
+echo %RED%==============================  
+echo %GREEN%=       HELLO USER!       =  
+echo %YELLOW%=   WELCOME TO BATCH!   =  
+echo %CYAN%==============================  
+echo.  
+echo %MAGENTA%This is a colorful banner using ANSI escape codes.  
+echo %RESET%  
+
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- If the colors **do not display correctly**, make sure you're running it on **Windows 10 or later**.  
+- You can add your own ASCII art or stylized text with `echo` lines.  
+- For more colors, look into **ANSI escape codes** — they work well in Windows terminals now.  
+- To insert a literal `ESC` character (ASCII 27) in advanced editors, use `Alt+027` on the numeric pad.  
+
+--------------------------------------------------------------------------------------------------------------

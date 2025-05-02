@@ -1,0 +1,54 @@
+# Voice Reminder  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File sets a **voice-based reminder** using PowerShell.  
+At a specified time, it uses the Windows speech engine (`SAPI.SpVoice`) to speak a custom message  
+and optionally shows a pop-up.  
+Great for study alerts, break notifications, or daily reminders!  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad.  
+2. Copy and Paste the Following Code.  
+3. Modify the `reminderTime` and `message` values as needed.  
+4. Save the file as a Batch File (`voice_reminder.bat`).  
+5. Run the batch file and let it alert you at the specified time.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Voice Reminder  
+cls  
+
+:: Set your reminder time in 24-hour format (e.g., 15:30 for 3:30 PM)  
+set "reminderTime=15:30"  
+set "message=Time to take a break!"  
+
+echo Waiting until %reminderTime% to remind you...  
+:waitLoop  
+for /f "tokens=1-2 delims=:" %%a in ("%time%") do (  
+    set "now=%%a:%%b"  
+)  
+if "%now%"=="%reminderTime%" goto remind  
+timeout /t 30 >nul  
+goto waitLoop  
+
+:remind  
+echo It's time!  
+:: Use PowerShell to speak the reminder aloud  
+PowerShell -Command "Add-Type –AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('%message%')"  
+
+:: Optional pop-up using PowerShell  
+PowerShell -Command "[System.Windows.Forms.MessageBox]::Show('%message%', 'Reminder')"  
+
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- **Customize `reminderTime` and `message`** at the top of the script.  
+- Works best when the batch script is kept running in the background.  
+- You can use `task scheduler` to run it daily at system startup.  
+- Ensure PowerShell is enabled and accessible from the Command Prompt.  
+- The pop-up requires .NET (normally available on all modern Windows PCs).  
+
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,39 @@
+# Clipboard Saver  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File **automatically saves the current clipboard content** (text only) into a `.txt` file.  
+It uses PowerShell to access the clipboard and appends the content into a `clipboard_log.txt` file.  
+Great for saving copied notes, URLs, or code snippets instantly!  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad.  
+2. Copy and Paste the Following Code.  
+3. Save the file as a Batch File (`clipboard_saver.bat`).  
+4. Run the batch file any time to capture and store your current clipboard content.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+setlocal enabledelayedexpansion  
+
+:: Define log file name  
+set "logFile=clipboard_log.txt"  
+
+:: Use PowerShell to read clipboard and save to log file  
+PowerShell -Command "Get-Clipboard" >> "%logFile%"  
+
+:: Add timestamp separator  
+echo -------------------- >> "%logFile%"  
+echo Saved clipboard content to %logFile%  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- You can place a shortcut to this script on your desktop or bind it to a keyboard hotkey.  
+- Useful for keeping track of everything you copy during work or study sessions.  
+- The script appends to `clipboard_log.txt` — you can clean it periodically.  
+- Works only for **text clipboard content**, not images or files.  
+
+--------------------------------------------------------------------------------------------------------------

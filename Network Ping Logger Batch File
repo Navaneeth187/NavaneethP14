@@ -1,0 +1,52 @@
+# Network Ping Logger  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File **pings a website (e.g., google.com) every 10 minutes** and logs whether the system  
+was able to reach it successfully.  
+Ideal for **monitoring internet connectivity** and troubleshooting network drops.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad.  
+2. Copy and Paste the Following Code.  
+3. Save the file as a Batch File (`ping_logger.bat`).  
+4. Run the file and let it run in the background for continuous monitoring.  
+5. View the log in `ping_log.txt`.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Network Ping Logger  
+setlocal  
+
+:: Set the target website to ping  
+set "target=google.com"  
+set "logfile=ping_log.txt"  
+
+echo Starting Network Ping Logger for %target%  
+echo Logging results to %logfile%  
+echo ------------------------------------------ >> "%logfile%"  
+
+:loop  
+set timeNow=%time:~0,8%  
+ping -n 1 %target% >nul  
+if errorlevel 1 (  
+    echo [%date% %timeNow%] Connection to %target% FAILED >> "%logfile%"  
+    echo [%date% %timeNow%] ❌ Ping failed  
+) else (  
+    echo [%date% %timeNow%] Connection to %target% SUCCESS >> "%logfile%"  
+    echo [%date% %timeNow%] ✅ Ping successful  
+)
+
+:: Wait for 10 minutes (600 seconds)  
+timeout /t 600 /nobreak >nul  
+goto loop  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Leave the script running in a minimized Command Prompt window for passive logging.  
+- Change `target=google.com` to test your own website or server.  
+- The `ping_log.txt` file grows over time — periodically archive or clear it.  
+- You can also change the ping interval by modifying `timeout /t 600`.  
+
+--------------------------------------------------------------------------------------------------------------

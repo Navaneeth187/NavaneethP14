@@ -1,0 +1,56 @@
+# Auto Zip Backup Script  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File automatically **zips the contents of a folder into a backup archive** using PowerShell.  
+It's perfect for creating regular backups of documents, code, or any important files into `.zip` format.  
+No third-party tools required — it uses Windows' built-in PowerShell compression.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad.  
+2. Copy and Paste the Following Code.  
+3. Modify the `source` and `destination` folder paths if needed.  
+4. Save the file as a Batch File (`auto_zip_backup.bat`).  
+5. Run the batch file to create a zipped backup.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Auto Zip Backup Script  
+setlocal  
+
+:: === CONFIGURE THESE VARIABLES ===  
+set "source=C:\Users\%USERNAME%\Documents\MyFiles"  
+set "destination=%USERPROFILE%\Desktop\MyBackup.zip"  
+
+echo Backing up files from: %source%  
+echo Saving ZIP to: %destination%  
+echo.
+
+:: Check if the source folder exists  
+if not exist "%source%" (  
+    echo Source folder not found!  
+    pause  
+    exit  
+)
+
+:: Use PowerShell to zip the folder  
+PowerShell -Command "Compress-Archive -Path '%source%\*' -DestinationPath '%destination%' -Force"
+
+if exist "%destination%" (  
+    echo ✅ Backup completed successfully.  
+) else (  
+    echo ❌ Failed to create ZIP backup.  
+)
+
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Make sure to update the `source` path to the folder you want to back up.  
+- You can schedule this batch script with **Task Scheduler** for automatic daily/weekly backups.  
+- The script will **overwrite** the backup file if it already exists (`-Force` flag).  
+- Output ZIP will include all files and subfolders inside the specified source directory.  
+
+--------------------------------------------------------------------------------------------------------------

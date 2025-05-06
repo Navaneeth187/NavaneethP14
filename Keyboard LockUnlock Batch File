@@ -1,0 +1,60 @@
+# Keyboard LockUnlock  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File **disables or enables the keyboard** using the Windows Device Console (`devcon.exe`).  
+Useful for demos, parental control, or learning about device management through scripting.  
+⚠ Note: Requires `devcon.exe` and administrator privileges.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Download `devcon.exe` from the official Microsoft source or Windows Driver Kit (WDK).  
+2. Place `devcon.exe` in the same folder as your batch file or in a system path directory.  
+3. Open Notepad.  
+4. Copy and Paste the Following Code.  
+5. Save the file as `keyboard_toggle.bat`.  
+6. Right-click and **Run as Administrator**.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Keyboard Lock/Unlock  
+setlocal enabledelayedexpansion  
+
+:: Device ID for keyboard (this may vary by system — update accordingly)  
+:: To find yours, run: devcon find * > devices.txt  
+set "keyboardID=ACPI\PNP0303"
+
+:: Ask user for action  
+echo Select an option:  
+echo [1] Lock Keyboard  
+echo [2] Unlock Keyboard  
+set /p choice=Enter choice (1 or 2):  
+
+if "%choice%"=="1" (  
+    echo Locking keyboard...  
+    devcon disable "%keyboardID%"  
+    echo ✅ Keyboard disabled.  
+    pause  
+    exit  
+)  
+
+if "%choice%"=="2" (  
+    echo Unlocking keyboard...  
+    devcon enable "%keyboardID%"  
+    echo ✅ Keyboard enabled.  
+    pause  
+    exit  
+)  
+
+echo Invalid choice.  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Use `devcon find *` to list all device IDs and find your keyboard’s exact ID.  
+- Replace `ACPI\PNP0303` with your specific keyboard hardware ID if different.  
+- **Run as Administrator** or the script will fail to execute the device control commands.  
+- Consider using two separate batch files (lock.bat and unlock.bat) for quick access.  
+
+--------------------------------------------------------------------------------------------------------------

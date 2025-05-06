@@ -1,0 +1,53 @@
+# Folder Visibility Toggler  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File **toggles a specific folder's visibility between hidden and visible** on each run.  
+It uses Windows' `attrib` command to apply or remove hidden and system attributes from the folder.  
+Perfect for quickly hiding or revealing sensitive folders without needing external software.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad.  
+2. Copy and Paste the Following Code.  
+3. Replace the folder path in the `set "folder=..."` line.  
+4. Save the file as `toggle_visibility.bat`.  
+5. Double-click to toggle visibility of the folder.  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Folder Visibility Toggler  
+setlocal
+
+:: Set the target folder path (edit this as needed)  
+set "folder=C:\Users\%USERNAME%\Documents\SecretFolder"
+
+:: Check if folder exists  
+if not exist "%folder%" (  
+    echo ❌ Folder not found: %folder%  
+    pause  
+    exit  
+)
+
+:: Check current visibility state  
+attrib "%folder%" | find "H" >nul  
+if %errorlevel%==0 (  
+    :: Folder is hidden — make it visible  
+    attrib -h -s "%folder%"  
+    echo ✅ Folder is now visible: %folder%  
+) else (  
+    :: Folder is visible — hide it  
+    attrib +h +s "%folder%"  
+    echo 🔒 Folder is now hidden: %folder%  
+)
+
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Update the `folder` path to any folder you want to hide or unhide easily.  
+- Use this to quickly conceal folders without deleting or moving their contents.  
+- Hidden folders won't be visible in File Explorer unless "Show hidden files" is enabled.  
+- Combine with a shortcut or password system for basic privacy protection.  
+
+--------------------------------------------------------------------------------------------------------------

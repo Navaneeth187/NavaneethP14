@@ -1,0 +1,47 @@
+# Scheduled Shutdown Timer  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File schedules a system shutdown after a specified time delay (in seconds) entered by the user.  
+It uses the Windows `shutdown -s -t` command to initiate a timed shutdown.  
+Perfect for setting a reminder-based shutdown while downloading, watching, or working.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `shutdown_timer.bat`  
+4. Double-click and enter the delay time (in seconds)  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Scheduled Shutdown Timer  
+color 0A  
+cls
+
+echo =============================  
+echo     SCHEDULED SHUTDOWN      
+echo =============================  
+echo.
+
+set /p time="Enter time in seconds to shutdown the PC (e.g., 3600 for 1 hour): "
+
+:: Validate input  
+echo %time% | findstr /R "^[0-9][0-9]*$" >nul  
+if errorlevel 1 (  
+    echo ❌ Invalid input! Please enter numeric seconds only.  
+    pause  
+    exit  
+)
+
+shutdown -s -t %time%  
+echo ✅ Your PC will shut down in %time% seconds.  
+echo To cancel, open Command Prompt and type: shutdown -a  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- You can convert hours to seconds (1 hr = 3600 seconds, 30 mins = 1800 seconds).  
+- To cancel the shutdown before the time is up, open Command Prompt and run: `shutdown -a`.  
+- Use this to manage screen time, power-saving, or safe automatic shutdowns.  
+--------------------------------------------------------------------------------------------------------------

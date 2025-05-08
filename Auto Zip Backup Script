@@ -1,0 +1,57 @@
+# Auto Zip Backup Script  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File uses PowerShell to automatically create a ZIP archive of a folder's contents.  
+The script prompts the user for a source folder and creates a compressed backup with a date-stamped filename.  
+Ideal for quick file backups and archiving important data.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `auto_zip_backup.bat`  
+4. Run the file and follow the prompts  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Auto Zip Backup Script  
+color 0A  
+cls
+
+echo ==============================  
+echo     AUTO ZIP BACKUP TOOL      
+echo ==============================  
+echo.
+
+:: Ask user for source folder  
+set /p "source=Enter the full path of the folder to back up: "
+
+:: Check if source folder exists  
+if not exist "%source%" (  
+    echo ❌ Folder does not exist!  
+    pause  
+    exit  
+)
+
+:: Generate backup filename with date  
+set "datetime=%date:~10,4%-%date:~4,2%-%date:~7,2%_%time:~0,2%%time:~3,2%%time:~6,2%"  
+set "datetime=%datetime: =0%"  
+set "zipfile=Backup_%datetime%.zip"
+
+:: Set destination folder  
+set "dest=%~dp0Backups"  
+if not exist "%dest%" mkdir "%dest%"
+
+:: Use PowerShell to zip folder  
+powershell -command "Compress-Archive -Path '%source%\\*' -DestinationPath '%dest%\%zipfile%'"
+
+echo ✅ Backup created at: %dest%\%zipfile%  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Ensure PowerShell is enabled and not restricted on your system.  
+- All backups are saved in a `Backups` folder beside the batch file.  
+- You can schedule this batch script using Task Scheduler for automatic daily backups.  
+--------------------------------------------------------------------------------------------------------------

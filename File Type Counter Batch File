@@ -1,0 +1,53 @@
+# File Type Counter  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File counts the number of specific file types (like .txt, .jpg, .pdf) in a selected folder.  
+It prompts the user to enter the file extension and the target directory, then shows how many such files exist.  
+Useful for file organization, cleanups, or content statistics.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `file_type_counter.bat`  
+4. Run the file and follow the prompts  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title File Type Counter  
+color 0B  
+cls
+
+echo =============================  
+echo      FILE TYPE COUNTER       
+echo =============================  
+echo.
+
+:: Ask user for folder and extension  
+set /p "folder=Enter the full path to the folder: "  
+set /p "ext=Enter the file extension (without dot, e.g., txt): "
+
+:: Validate folder path  
+if not exist "%folder%" (  
+    echo ❌ The specified folder does not exist.  
+    pause  
+    exit  
+)
+
+:: Count matching files  
+pushd "%folder%"  
+set count=0  
+for /f %%A in ('dir /b /a:-d *.%ext% 2^>nul') do set /a count+=1  
+popd
+
+echo.  
+echo ✅ Number of .%ext% files in "%folder%": %count%  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Enter the extension without a dot (e.g., enter `jpg`, not `.jpg`).  
+- Make sure to provide the full folder path, like `C:\Users\YourName\Documents`.  
+- You can reuse this to quickly get stats on file types before backing up or deleting files.  
+--------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,66 @@
+# Duplicate File Finder (Simple)  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File scans a given folder and identifies files with duplicate names.  
+It performs a basic check for duplicate filenames (not content), which helps clean up cluttered folders.  
+Great for organizing downloads, documents, or media libraries.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `find_duplicates.bat`  
+4. Run the file and follow the prompts  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Duplicate File Finder (Simple)  
+color 0E  
+cls
+
+echo ==============================  
+echo     DUPLICATE FILE FINDER      
+echo ==============================  
+echo.
+
+:: Prompt for directory  
+set /p "folder=Enter the full path of the folder to scan: "
+
+:: Check if folder exists  
+if not exist "%folder%" (  
+    echo ❌ Folder does not exist. Please check the path.  
+    pause  
+    exit  
+)
+
+:: Create a temporary file list  
+set "tmpfile=%temp%\filelist.txt"  
+dir /b /a:-d "%folder%" > "%tmpfile%"
+
+:: Check for duplicates using findstr  
+echo.  
+echo 🔍 Searching for duplicate filenames...  
+echo.
+
+for /f "tokens=* delims=" %%A in ('type "%tmpfile%"') do (
+    findstr /I /C:"%%A" "%tmpfile%" | find /c /i "%%A" > nul
+    for /f %%C in ('findstr /I /C:"%%A" "%tmpfile%" ^| find /c /i "%%A"') do (
+        if %%C GTR 1 (
+            echo ⚠ Duplicate found: %%A
+        )
+    )
+)
+
+:: Clean up  
+del "%tmpfile%" > nul  
+echo.  
+echo ✅ Scan complete.  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- This script only checks for duplicate **file names**, not file content.  
+- For deep duplicate analysis by file size/hash, use third-party tools or advanced PowerShell scripts.  
+- Ideal for cleaning messy folders where files might be saved multiple times with the same name.  
+--------------------------------------------------------------------------------------------------------------

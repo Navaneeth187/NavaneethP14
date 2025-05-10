@@ -1,0 +1,47 @@
+# Port Status Checker  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File uses PowerShell to check whether a specific port (e.g., 80 or 443) is open on a given IP address or domain.  
+It leverages the `Test-NetConnection` command to test network reachability and port availability.  
+Ideal for basic diagnostics or network troubleshooting.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `port_checker.bat`  
+4. Run the file and follow the prompts  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Port Status Checker  
+color 0B  
+cls
+
+echo ==============================  
+echo     PORT STATUS CHECKER       
+echo ==============================  
+echo.
+
+:: Prompt user for domain/IP and port  
+set /p "target=Enter the target IP or domain (e.g., google.com): "  
+set /p "port=Enter the port number to check (e.g., 80): "
+
+:: Run PowerShell Test-NetConnection  
+echo.  
+echo 🔍 Checking port status...  
+echo.  
+
+powershell -Command "Test-NetConnection -ComputerName '%target%' -Port %port%"
+
+echo.  
+echo ✅ Check complete. Review the results above.  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Requires PowerShell (available by default on Windows 7+).  
+- Great for checking if a web server, game server, or custom service is accessible.  
+- You can automate testing for multiple servers by extending the script.  
+--------------------------------------------------------------------------------------------------------------

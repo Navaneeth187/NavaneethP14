@@ -1,0 +1,59 @@
+# Auto File Extension Changer  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File changes the file extension of all files in a specified folder.  
+For example, it can rename all `.txt` files to `.md` or any other desired extension.  
+Perfect for mass file conversions or formatting consistency.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `change_extension.bat`  
+4. Run the file and follow the prompts  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Auto File Extension Changer  
+color 0A  
+cls
+
+echo ==============================  
+echo   AUTO FILE EXTENSION CHANGER  
+echo ==============================  
+echo.
+
+:: Prompt user for folder path  
+set /p "folder=Enter full path of the folder: "
+
+:: Validate folder  
+if not exist "%folder%" (
+    echo ❌ Folder not found. Please check the path.
+    pause
+    exit
+)
+
+:: Get old and new extensions  
+set /p "oldext=Enter the OLD extension (e.g., txt): "
+set /p "newext=Enter the NEW extension (e.g., md): "
+
+echo.  
+echo 🔄 Changing all .%oldext% files to .%newext% in "%folder%"...  
+echo.
+
+cd /d "%folder%"  
+for %%f in (*.%oldext%) do (
+    ren "%%f" "%%~nf.%newext%"
+)
+
+echo.  
+echo ✅ Extension change complete.  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Do **not** include the dot (.) in extensions; just enter `txt` instead of `.txt`.  
+- Works only in the specified folder — does not scan subfolders.  
+- Useful for file type organization or preparing markdown/docs from .txt sources.  
+--------------------------------------------------------------------------------------------------------------

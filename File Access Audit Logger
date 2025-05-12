@@ -1,0 +1,67 @@
+# File Access Audit Logger  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File monitors a specified folder for file access events.  
+It uses the `dir /T:A` command to track and log the last accessed time of files.  
+Great for auditing or tracking usage of important documents.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `file_access_audit.bat`  
+4. Run the file and follow the prompts  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title File Access Audit Logger  
+color 0C  
+cls
+
+echo ==============================  
+echo   FILE ACCESS AUDIT LOGGER    
+echo ==============================  
+echo.
+
+:: Prompt user for folder path  
+set /p "folder=Enter full path of the folder to monitor: "
+
+:: Validate folder  
+if not exist "%folder%" (
+    echo ❌ Folder not found. Please check the path.
+    pause
+    exit
+)
+
+:: Create a log file  
+set "logfile=%folder%\access_log.txt"
+
+:: Print header to log file  
+echo File Access Audit Log > "%logfile%"  
+echo ============================== >> "%logfile%"  
+echo. >> "%logfile%"  
+
+:: Monitor file access using dir /T:A  
+echo 🔍 Monitoring file access events in "%folder%"...
+echo.  
+echo Logging to: %logfile%
+echo.
+
+:LOOP  
+for /f "delims=" %%A in ('dir "%folder%" /T:A /A:-D /B') do (
+    echo File: %%A | Accessed at: %date% %time% >> "%logfile%"
+)
+
+:: Wait for 10 seconds before next scan  
+timeout /t 10 >nul  
+
+:: Go back to loop  
+goto LOOP  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Logs will be stored in a file named `access_log.txt` inside the specified folder.  
+- This script will run indefinitely, checking the folder every 10 seconds for file access events.  
+- You can stop the script anytime using `CTRL + C`.  
+- Customize the script to log additional details like file size, or modify the scan interval.  
+--------------------------------------------------------------------------------------------------------------

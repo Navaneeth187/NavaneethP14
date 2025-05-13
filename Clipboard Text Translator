@@ -1,0 +1,53 @@
+# Clipboard Text Translator (via Web)  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File reads the current clipboard text and opens Google Translate in your default browser  
+to automatically translate the content.  
+Very useful for quick language translation without manually copying/pasting.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `translate_clipboard.bat`  
+4. Run the file to open Google Translate with your clipboard text  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Clipboard Text Translator  
+color 0B  
+cls
+
+echo ==============================  
+echo   CLIPBOARD TEXT TRANSLATOR  
+echo ==============================  
+echo.
+
+:: Use PowerShell to read clipboard and open Google Translate  
+for /f "usebackq delims=" %%i in (`powershell -command "Get-Clipboard"`) do (
+    set "clip=%%i"
+    goto launch
+)
+
+:launch  
+:: Encode URL-safe version of the clipboard text  
+setlocal EnableDelayedExpansion  
+set "clipUrl="  
+for %%A in (!clip!) do (
+    set "clipUrl=!clipUrl!%%A"
+)  
+endlocal & set "clip=%clipUrl%"
+
+:: Open browser with Google Translate using clipboard text  
+start "" "https://translate.google.com/?sl=auto&tl=en&text=%clip%&op=translate"  
+
+echo ✅ Translation opened in your browser.  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Make sure PowerShell is available on your system (default in Windows 10/11).  
+- This opens Google Translate with auto-detect language and English as output (change `tl=en` to any other code like `hi`, `es`, `fr` etc.).  
+- Works best for short to medium-length clipboard text.  
+--------------------------------------------------------------------------------------------------------------

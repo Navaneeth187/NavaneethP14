@@ -1,0 +1,60 @@
+# Windows Services Checker  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File allows users to either display all currently running Windows services or  
+check the status of a specific service.  
+Ideal for diagnosing system service issues or verifying if a service is running properly.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `services_checker.bat`  
+4. Run the file and follow the on-screen options  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Windows Services Checker  
+color 1F  
+cls
+
+:MENU  
+echo ==============================  
+echo     WINDOWS SERVICES CHECKER  
+echo ==============================  
+echo 1. View all running services  
+echo 2. Check specific service status  
+echo 3. Exit  
+echo.  
+set /p "choice=Select an option (1-3): "
+
+if "%choice%"=="1" goto ALLSERVICES  
+if "%choice%"=="2" goto CHECKSERVICE  
+if "%choice%"=="3" exit  
+goto MENU
+
+:ALLSERVICES  
+cls  
+echo 🔍 Listing all running services...  
+echo.  
+sc query | findstr /I "RUNNING"  
+echo.  
+pause  
+goto MENU
+
+:CHECKSERVICE  
+cls  
+set /p "svcname=Enter the service name to check (e.g., wuauserv): "
+echo.  
+echo 🔍 Checking status of "%svcname%"...  
+sc query "%svcname%"  
+echo.  
+pause  
+goto MENU  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- To find the actual service name (not display name), use `services.msc` or check `sc query`.  
+- Useful for IT troubleshooting and automation scripts.  
+- You can expand the script to also start/stop services.  
+--------------------------------------------------------------------------------------------------------------

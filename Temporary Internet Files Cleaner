@@ -1,0 +1,53 @@
+# Temporary Internet Files Cleaner  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File deletes browser cache and temporary internet files from common browsers  
+like Chrome, Edge, and Internet Explorer.  
+It helps improve privacy and recover disk space by clearing cached data.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `internet_cache_cleaner.bat`  
+4. Right-click and Run as Administrator for full effect  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Temporary Internet Files Cleaner  
+color 0C  
+cls
+
+echo ================================
+echo   TEMPORARY INTERNET CLEANER
+echo ================================
+echo.
+
+:: Cleaning Windows Temporary Internet Files  
+echo 🧹 Deleting Windows Temporary Internet Files...  
+del /q /f /s "%LocalAppData%\Microsoft\Windows\INetCache\*" >nul 2>&1
+rd /s /q "%LocalAppData%\Microsoft\Windows\INetCache" >nul 2>&1
+
+:: Cleaning Microsoft Edge cache  
+echo 🧹 Deleting Microsoft Edge Cache...  
+del /q /f /s "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+
+:: Cleaning Google Chrome cache  
+echo 🧹 Deleting Google Chrome Cache...  
+del /q /f /s "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*" >nul 2>&1
+
+:: Cleaning Internet Explorer cache  
+echo 🧹 Deleting Internet Explorer Cache...  
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 8
+
+echo.  
+echo ✅ Cleaning completed successfully.  
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Ensure all browsers are closed before running the script.  
+- You may need Administrator rights for some files to be deleted.  
+- You can schedule this batch file to run periodically using Task Scheduler.  
+--------------------------------------------------------------------------------------------------------------

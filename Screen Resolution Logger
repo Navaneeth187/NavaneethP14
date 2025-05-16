@@ -1,0 +1,39 @@
+# Screen Resolution Logger  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File uses PowerShell to fetch and log the current screen resolution.  
+It's useful for troubleshooting display issues, setting up remote support, or keeping system info records.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `screen_resolution_logger.bat`  
+4. Run the file to log the screen resolution to a text file  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Screen Resolution Logger  
+color 1F  
+cls
+
+echo ===============================
+echo   SCREEN RESOLUTION LOGGER
+echo ===============================
+echo.
+
+set "logfile=Screen_Resolution_Log.txt"
+
+echo 🔍 Fetching screen resolution...
+powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $res = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds; \"$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) - Resolution: $($res.Width)x$($res.Height)\"" >> "%logfile%"
+
+echo ✅ Screen resolution logged to %logfile%
+pause  
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Each run appends a new timestamped entry to the log file.  
+- Can be scheduled using Task Scheduler to track resolution over time.  
+- Make sure PowerShell is enabled and not restricted by policy.  
+--------------------------------------------------------------------------------------------------------------

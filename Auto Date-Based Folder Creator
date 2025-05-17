@@ -1,0 +1,36 @@
+# Auto Date-Based Folder Creator  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File automatically creates a new folder named with the current date (e.g., 2025-05-17).  
+It's perfect for organizing backups, logs, journal entries, or any time-stamped content.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the file as `date_folder_creator.bat`  
+4. Run the file to create a folder with today’s date  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Auto Date-Based Folder Creator  
+color 0A  
+cls
+
+:: Get today's date in YYYY-MM-DD format
+for /f "tokens=2 delims==." %%I in ('"wmic os get LocalDateTime /value"') do set datetime=%%I
+set date=%datetime:~0,4%-%datetime:~4,2%-%datetime:~6,2%
+
+:: Create folder with date name
+mkdir "%date%" 2>nul
+
+echo ✅ Folder created with name: %date%
+pause
+exit  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+- Run daily to generate folders for time-stamped storage.  
+- You can add file-copy or logging commands inside this folder.  
+- Works best with Task Scheduler for automated daily backups/logs.  
+--------------------------------------------------------------------------------------------------------------

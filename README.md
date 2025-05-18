@@ -1,235 +1,235 @@
-Batch File Collection
+# **Batch File Collection**
+
 Welcome to my collection of useful and practical batch files! These batch files automate various tasks on Windows systems, helping you with everything from system maintenance to fun projects. Below is a list of the batch files included in this repository, along with a brief description and difficulty level.
 
-Batch Files
-Alarm Clock Batch File
-Description: Acts as an alarm clock by setting a specific time for an alert using sound or message.
-Level: Beginner
+---
 
-Auto Date-Based Folder Creator
-Description: Creates folders automatically based on the current date.
-Level: Beginner
+## **Batch Files**
 
-Auto File Extension Changer
-Description: Changes file extensions in bulk in a selected directory.
-Level: Intermediate
+1. **Alarm Clock Batch File**  
+   *Description:* Acts as an alarm clock by setting a specific time for an alert using sound or message.  
+   *Level:* Beginner
 
-Auto Folder Organizer Batch File
-Description: Organizes files into folders based on type or extension.
-Level: Intermediate
+2. **Auto Date-Based Folder Creator**  
+   *Description:* Creates folders automatically based on the current date.  
+   *Level:* Beginner
 
-Auto USB File Copier Batch File
-Description: Automatically copies files from a USB when it's connected.
-Level: Advanced
+3. **Auto File Extension Changer**  
+   *Description:* Changes file extensions in bulk in a selected directory.  
+   *Level:* Intermediate
 
-Auto Wallpaper Changer Batch File
-Description: Changes desktop wallpaper at regular intervals.
-Level: Intermediate
+4. **Auto Folder Organizer Batch File**  
+   *Description:* Organizes files into folders based on type or extension.  
+   *Level:* Intermediate
 
-Auto Zip Backup Script
-Description: Creates a zip backup of specific files or folders.
-Level: Intermediate
+5. **Auto USB File Copier Batch File**  
+   *Description:* Automatically copies files from a USB when it's connected.  
+   *Level:* Advanced
 
-Auto Zip Backup Script Batch File
-Description: Batch script for automated zip file backups.
-Level: Intermediate
+6. **Auto Wallpaper Changer Batch File**  
+   *Description:* Changes desktop wallpaper at regular intervals.  
+   *Level:* Intermediate
 
-Automatic System Cleaner Batch File
-Description: Cleans temporary files and optimizes system performance.
-Level: Intermediate
+7. **Auto Zip Backup Script**  
+   *Description:* Creates a zip backup of specific files or folders.  
+   *Level:* Intermediate
 
-Batch File Renamer
-Description: Renames multiple files using patterns.
-Level: Intermediate
+8. **Auto Zip Backup Script Batch File**  
+   *Description:* Batch script for automated zip file backups.  
+   *Level:* Intermediate
 
-Battery Health Checker Batch File
-Description: Reports on battery health status.
-Level: Intermediate
+9. **Automatic System Cleaner Batch File**  
+   *Description:* Cleans temporary files and optimizes system performance.  
+   *Level:* Intermediate
 
-Calculator Batch File
-Description: Simple arithmetic calculator in batch.
-Level: Beginner
+10. **Batch File Renamer**  
+    *Description:* Renames multiple files using patterns.  
+    *Level:* Intermediate
 
-Clipboard Saver Batch File
-Description: Saves current clipboard contents to a file.
-Level: Intermediate
+11. **Battery Health Checker Batch File**  
+    *Description:* Reports on battery health status.  
+    *Level:* Intermediate
 
-Clipboard Text Translator
-Description: Translates text from clipboard using online APIs.
-Level: Advanced
+12. **Calculator Batch File**  
+    *Description:* Simple arithmetic calculator in batch.  
+    *Level:* Beginner
 
-Colorful Text Banner Batch File
-Description: Displays colorful banners in Command Prompt.
-Level: Beginner
+13. **Clipboard Saver Batch File**  
+    *Description:* Saves current clipboard contents to a file.  
+    *Level:* Intermediate
 
-Daily Journal Logger Batch File
-Description: Logs daily entries in a journal-style format.
-Level: Beginner
+14. **Clipboard Text Translator**  
+    *Description:* Translates text from clipboard using online APIs.  
+    *Level:* Advanced
 
-Disk Space Checker Batch File
-Description: Checks available disk space on drives.
-Level: Intermediate
+15. **Colorful Text Banner Batch File**  
+    *Description:* Displays colorful banners in Command Prompt.  
+    *Level:* Beginner
 
-Drive Usage Report Generator Batch File
-Description: Generates a storage usage report.
-Level: Intermediate
+16. **Daily Journal Logger Batch File**  
+    *Description:* Logs daily entries in a journal-style format.  
+    *Level:* Beginner
 
-Duplicate File Finder (Simple) Batch File
-Description: Identifies duplicate files in directories.
-Level: Advanced
+17. **Disk Space Checker Batch File**  
+    *Description:* Checks available disk space on drives.  
+    *Level:* Intermediate
 
-Fake Error Message Batch File
-Description: Displays a fake error message (for fun only).
-Level: Beginner
+18. **Drive Usage Report Generator Batch File**  
+    *Description:* Generates a storage usage report.  
+    *Level:* Intermediate
 
-File Access Audit Logger
-Description: Logs file access events.
-Level: Advanced
+19. **Duplicate File Finder (Simple) Batch File**  
+    *Description:* Identifies duplicate files in directories.  
+    *Level:* Advanced
 
-File Type Counter Batch File
-Description: Counts file types in a given directory.
-Level: Intermediate
+20. **Fake Error Message Batch File**  
+    *Description:* Displays a fake error message (for fun only).  
+    *Level:* Beginner
 
-Folder Activity Logger Batch File
-Description: Logs changes within a folder.
-Level: Advanced
+21. **File Access Audit Logger**  
+    *Description:* Logs file access events.  
+    *Level:* Advanced
 
-Folder Size Analyzer Batch File
-Description: Analyzes folder sizes and shows usage.
-Level: Intermediate
+22. **File Type Counter Batch File**  
+    *Description:* Counts file types in a given directory.  
+    *Level:* Intermediate
 
-Folder Visibility Toggler Batch File
-Description: Toggles hidden status of folders.
-Level: Beginner
+23. **Folder Activity Logger Batch File**  
+    *Description:* Logs changes within a folder.  
+    *Level:* Advanced
 
-IP & Network Monitor Batch File
-Description: Monitors IP and network activity.
-Level: Advanced
+24. **Folder Size Analyzer Batch File**  
+    *Description:* Analyzes folder sizes and shows usage.  
+    *Level:* Intermediate
 
-Internet Speed Tester Batch File
-Description: Measures upload/download speeds.
-Level: Intermediate
+25. **Folder Visibility Toggler Batch File**  
+    *Description:* Toggles hidden status of folders.  
+    *Level:* Beginner
 
-Keyboard Lock/Unlock Batch File
-Description: Locks or unlocks keyboard input.
-Level: Advanced
+26. **IP & Network Monitor Batch File**  
+    *Description:* Monitors IP and network activity.  
+    *Level:* Advanced
 
-Localhost Web Server Starter
-Description: Starts a local server for testing.
-Level: Intermediate
+27. **Internet Speed Tester Batch File**  
+    *Description:* Measures upload/download speeds.  
+    *Level:* Intermediate
 
-Locker Batch File
-Description: Locks folders with password protection.
-Level: Intermediate
+28. **Keyboard Lock/Unlock Batch File**  
+    *Description:* Locks or unlocks keyboard input.  
+    *Level:* Advanced
 
-Loop Message Code
-Description: Continuously displays a custom message.
-Level: Beginner
+29. **Localhost Web Server Starter**  
+    *Description:* Starts a local server for testing.  
+    *Level:* Intermediate
 
-Network Ping Logger Batch File
-Description: Logs ping responses to track connectivity.
-Level: Intermediate
+30. **Locker Batch File**  
+    *Description:* Locks folders with password protection.  
+    *Level:* Intermediate
 
-PC Info Logger Batch File
-Description: Logs detailed PC hardware/software info.
-Level: Intermediate
+31. **Loop Message Code**  
+    *Description:* Continuously displays a custom message.  
+    *Level:* Beginner
 
-PC Usage Timer Batch File
-Description: Tracks how long the system is in use.
-Level: Intermediate
+32. **Network Ping Logger Batch File**  
+    *Description:* Logs ping responses to track connectivity.  
+    *Level:* Intermediate
 
-Password Generator Batch File
-Description: Generates strong random passwords.
-Level: Intermediate
+33. **PC Info Logger Batch File**  
+    *Description:* Logs detailed PC hardware/software info.  
+    *Level:* Intermediate
 
-Port Status Checker Batch File
-Description: Checks if specific ports are open.
-Level: Intermediate
+34. **PC Usage Timer Batch File**  
+    *Description:* Tracks how long the system is in use.  
+    *Level:* Intermediate
 
-Process Monitor Batch File
-Description: Lists and tracks active processes.
-Level: Advanced
+35. **Password Generator Batch File**  
+    *Description:* Generates strong random passwords.  
+    *Level:* Intermediate
 
-Quick Notes Taker Batch File
-Description: Quickly save notes from command line.
-Level: Beginner
+36. **Port Status Checker Batch File**  
+    *Description:* Checks if specific ports are open.  
+    *Level:* Intermediate
 
-README.md
-Description: Documentation for this project.
-Level: Beginner
+37. **Process Monitor Batch File**  
+    *Description:* Lists and tracks active processes.  
+    *Level:* Advanced
 
-Recycle Bin Auto-Cleaner Batch File
-Description: Automatically empties Recycle Bin.
-Level: Beginner
+38. **Quick Notes Taker Batch File**  
+    *Description:* Quickly save notes from command line.  
+    *Level:* Beginner
 
-Scheduled Shutdown Timer Batch File
-Description: Sets a timer to auto-shutdown system.
-Level: Beginner
+39. **README.md**  
+    *Description:* Documentation for this project.  
+    *Level:* Beginner
 
-Screen Resolution Logger
-Description: Logs the current screen resolution.
-Level: Intermediate
+40. **Recycle Bin Auto-Cleaner Batch File**  
+    *Description:* Automatically empties Recycle Bin.  
+    *Level:* Beginner
 
-Simple Quiz Game Batch File
-Description: A basic command-line quiz game.
-Level: Beginner
+41. **Scheduled Shutdown Timer Batch File**  
+    *Description:* Sets a timer to auto-shutdown system.  
+    *Level:* Beginner
 
-Snake Game Batch File
-Description: Classic Snake game in batch format.
-Level: Intermediate
+42. **Screen Resolution Logger**  
+    *Description:* Logs the current screen resolution.  
+    *Level:* Intermediate
 
-Stealth Keylogger (Ethical Learning Only) Batch File
-Description: Educational keylogger for learning purposes.
-Level: Advanced
+43. **Simple Quiz Game Batch File**  
+    *Description:* A basic command-line quiz game.  
+    *Level:* Beginner
 
-System Info Batch File
-Description: Displays detailed OS and hardware info.
-Level: Intermediate
+44. **Snake Game Batch File**  
+    *Description:* Classic Snake game in batch format.  
+    *Level:* Intermediate
 
-Temporary Internet Files Cleaner
-Description: Cleans up browser cache and temp files.
-Level: Intermediate
+45. **Stealth Keylogger (Ethical Learning Only) Batch File**  
+    *Description:* Educational keylogger for learning purposes.  
+    *Level:* Advanced
 
-To-Do List Manager Batch File
-Description: Simple to-do list management tool.
-Level: Beginner
+46. **System Info Batch File**  
+    *Description:* Displays detailed OS and hardware info.  
+    *Level:* Intermediate
 
-USB Detector Logger Batch File
-Description: Logs USB connect/disconnect events.
-Level: Intermediate
+47. **Temporary Internet Files Cleaner**  
+    *Description:* Cleans up browser cache and temp files.  
+    *Level:* Intermediate
 
-Voice Reminder Batch File
-Description: Speaks reminders using text-to-speech.
-Level: Intermediate
+48. **To-Do List Manager Batch File**  
+    *Description:* Simple to-do list management tool.  
+    *Level:* Beginner
 
-Website Blocker Batch File
-Description: Blocks access to websites by modifying hosts file.
-Level: Intermediate
+49. **USB Detector Logger Batch File**  
+    *Description:* Logs USB connect/disconnect events.  
+    *Level:* Intermediate
 
-WiFi Network Scanner Batch File
-Description: Lists available WiFi networks nearby.
-Level: Intermediate
+50. **Voice Reminder Batch File**  
+    *Description:* Speaks reminders using text-to-speech.  
+    *Level:* Intermediate
 
-Windows Services Checker Batch File
-Description: Lists status of Windows services.
-Level: Intermediate
+51. **Website Blocker Batch File**  
+    *Description:* Blocks access to websites by modifying hosts file.  
+    *Level:* Intermediate
 
-Getting Started
+52. **WiFi Network Scanner Batch File**  
+    *Description:* Lists available WiFi networks nearby.  
+    *Level:* Intermediate
+
+53. **Windows Services Checker Batch File**  
+    *Description:* Lists status of Windows services.  
+    *Level:* Intermediate
+
+---
+
+## **Getting Started**
+
 To use these batch files:
-
-Download or clone this repository.
-
-Navigate to the folder containing the batch file you want to use.
-
-Double-click the .bat file to execute it.
-
-Alternatively, use the Command Prompt:
-
-cmd
-Copy
-Edit
-cd path\to\file
-filename.bat
+1. Download or clone this repository.
+2. Navigate to the folder containing the batch file you want to use.
+3. Double-click the `.bat` file to execute it.
+4. Alternatively, use the Command Prompt:
+   ```cmd
+   cd path\\to\\file
+   filename.bat
 Prerequisites
 A Windows operating system.
 

@@ -1,0 +1,158 @@
+# Student Record Management System – C Program
+--------------------------------------------------------------------------------------------------------------
+This C program manages student records using structures and file handling.  
+It allows you to add, view, search, and delete student information saved in a file.  
+Perfect for learning structs, file I/O, and menu-driven logic in C.  
+--------------------------------------------------------------------------------------------------------------
+
+# FEATURES
+1. Add New Student  
+2. Display All Students  
+3. Search Student by Roll Number  
+4. Delete Student by Roll Number  
+5. Exit  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS
+1. Copy the code into a file named `student_record.c`  
+2. Compile the file using any C compiler (e.g., `gcc student_record.c -o student_record`)  
+3. Run the executable (`./student_record` on Linux/macOS or `student_record.exe` on Windows)  
+4. Interact using the menu to manage records  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Student {
+    int roll;
+    char name[50];
+    float marks;
+};
+
+void addStudent() {
+    struct Student s;
+    FILE *fp = fopen("students.dat", "ab");
+
+    printf("Enter Roll No: ");
+    scanf("%d", &s.roll);
+    printf("Enter Name: ");
+    scanf(" %[^\n]", s.name);
+    printf("Enter Marks: ");
+    scanf("%f", &s.marks);
+
+    fwrite(&s, sizeof(s), 1, fp);
+    fclose(fp);
+
+    printf("✅ Student record added successfully.\n");
+}
+
+void displayStudents() {
+    struct Student s;
+    FILE *fp = fopen("students.dat", "rb");
+
+    if (!fp) {
+        printf("❌ No records found.\n");
+        return;
+    }
+
+    printf("\n--- All Student Records ---\n");
+    while (fread(&s, sizeof(s), 1, fp)) {
+        printf("Roll: %d\tName: %s\tMarks: %.2f\n", s.roll, s.name, s.marks);
+    }
+
+    fclose(fp);
+}
+
+void searchStudent() {
+    int roll, found = 0;
+    struct Student s;
+    FILE *fp = fopen("students.dat", "rb");
+
+    if (!fp) {
+        printf("❌ No records found.\n");
+        return;
+    }
+
+    printf("Enter Roll No to search: ");
+    scanf("%d", &roll);
+
+    while (fread(&s, sizeof(s), 1, fp)) {
+        if (s.roll == roll) {
+            printf("✅ Record Found:\n");
+            printf("Roll: %d\tName: %s\tMarks: %.2f\n", s.roll, s.name, s.marks);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("❌ Record not found.\n");
+    }
+
+    fclose(fp);
+}
+
+void deleteStudent() {
+    int roll, found = 0;
+    struct Student s;
+    FILE *fp = fopen("students.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
+
+    if (!fp || !temp) {
+        printf("❌ Error opening files.\n");
+        return;
+    }
+
+    printf("Enter Roll No to delete: ");
+    scanf("%d", &roll);
+
+    while (fread(&s, sizeof(s), 1, fp)) {
+        if (s.roll != roll) {
+            fwrite(&s, sizeof(s), 1, temp);
+        } else {
+            found = 1;
+        }
+    }
+
+    fclose(fp);
+    fclose(temp);
+
+    remove("students.dat");
+    rename("temp.dat", "students.dat");
+
+    if (found)
+        printf("✅ Record deleted successfully.\n");
+    else
+        printf("❌ Record not found.\n");
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n----- Student Record Menu -----\n");
+        printf("1. Add Student\n2. Display All\n3. Search Student\n4. Delete Student\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: addStudent(); break;
+            case 2: displayStudents(); break;
+            case 3: searchStudent(); break;
+            case 4: deleteStudent(); break;
+            case 5: printf("👋 Exiting...\n"); exit(0);
+            default: printf("❌ Invalid choice. Try again.\n");
+        }
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips
+- All records are stored in `students.dat` file  
+- Make sure to run from the same directory to avoid file errors  
+- You can enhance it with sorting, editing, and login system  
+--------------------------------------------------------------------------------------------------------------

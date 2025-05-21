@@ -1,0 +1,237 @@
+# Simple Banking System – C Program
+--------------------------------------------------------------------------------------------------------------
+This C program simulates a basic banking system using structures and file handling.  
+Users can create accounts, deposit, withdraw, check balances, and delete accounts.  
+Great for practicing structs, file I/O, and menu-driven logic in C.  
+--------------------------------------------------------------------------------------------------------------
+
+# FEATURES
+1. Create New Account  
+2. View All Accounts  
+3. Search Account by Account Number  
+4. Deposit Amount  
+5. Withdraw Amount  
+6. Delete Account  
+7. Exit  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS
+1. Copy the code into a file named `banking_system.c`  
+2. Compile the file using any C compiler (e.g., `gcc banking_system.c -o banking_system`)  
+3. Run the executable (`./banking_system` on Linux/macOS or `banking_system.exe` on Windows)  
+4. Use the menu to manage customer accounts  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct BankAccount {
+    int accNo;
+    char name[50];
+    float balance;
+};
+
+void createAccount() {
+    struct BankAccount b;
+    FILE *fp = fopen("accounts.dat", "ab");
+
+    printf("Enter Account Number: ");
+    scanf("%d", &b.accNo);
+    printf("Enter Account Holder Name: ");
+    scanf(" %[^\n]", b.name);
+    printf("Enter Initial Balance: ");
+    scanf("%f", &b.balance);
+
+    fwrite(&b, sizeof(b), 1, fp);
+    fclose(fp);
+
+    printf("✅ Account created successfully.\n");
+}
+
+void viewAccounts() {
+    struct BankAccount b;
+    FILE *fp = fopen("accounts.dat", "rb");
+
+    if (!fp) {
+        printf("❌ No accounts found.\n");
+        return;
+    }
+
+    printf("\n--- All Bank Accounts ---\n");
+    while (fread(&b, sizeof(b), 1, fp)) {
+        printf("Acc No: %d\tName: %s\tBalance: ₹%.2f\n", b.accNo, b.name, b.balance);
+    }
+
+    fclose(fp);
+}
+
+void searchAccount() {
+    int accNo, found = 0;
+    struct BankAccount b;
+    FILE *fp = fopen("accounts.dat", "rb");
+
+    if (!fp) {
+        printf("❌ No accounts found.\n");
+        return;
+    }
+
+    printf("Enter Account Number to search: ");
+    scanf("%d", &accNo);
+
+    while (fread(&b, sizeof(b), 1, fp)) {
+        if (b.accNo == accNo) {
+            printf("✅ Account Found:\n");
+            printf("Acc No: %d\tName: %s\tBalance: ₹%.2f\n", b.accNo, b.name, b.balance);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found)
+        printf("❌ Account not found.\n");
+
+    fclose(fp);
+}
+
+void depositAmount() {
+    int accNo, found = 0;
+    float amount;
+    struct BankAccount b;
+    FILE *fp = fopen("accounts.dat", "rb+");
+
+    if (!fp) {
+        printf("❌ No accounts found.\n");
+        return;
+    }
+
+    printf("Enter Account Number to deposit into: ");
+    scanf("%d", &accNo);
+
+    while (fread(&b, sizeof(b), 1, fp)) {
+        if (b.accNo == accNo) {
+            printf("Enter amount to deposit: ₹");
+            scanf("%f", &amount);
+            b.balance += amount;
+
+            fseek(fp, -sizeof(b), SEEK_CUR);
+            fwrite(&b, sizeof(b), 1, fp);
+
+            printf("✅ Deposit successful. New Balance: ₹%.2f\n", b.balance);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found)
+        printf("❌ Account not found.\n");
+
+    fclose(fp);
+}
+
+void withdrawAmount() {
+    int accNo, found = 0;
+    float amount;
+    struct BankAccount b;
+    FILE *fp = fopen("accounts.dat", "rb+");
+
+    if (!fp) {
+        printf("❌ No accounts found.\n");
+        return;
+    }
+
+    printf("Enter Account Number to withdraw from: ");
+    scanf("%d", &accNo);
+
+    while (fread(&b, sizeof(b), 1, fp)) {
+        if (b.accNo == accNo) {
+            printf("Enter amount to withdraw: ₹");
+            scanf("%f", &amount);
+
+            if (b.balance >= amount) {
+                b.balance -= amount;
+
+                fseek(fp, -sizeof(b), SEEK_CUR);
+                fwrite(&b, sizeof(b), 1, fp);
+
+                printf("✅ Withdrawal successful. New Balance: ₹%.2f\n", b.balance);
+            } else {
+                printf("❌ Insufficient balance.\n");
+            }
+
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found)
+        printf("❌ Account not found.\n");
+
+    fclose(fp);
+}
+
+void deleteAccount() {
+    int accNo, found = 0;
+    struct BankAccount b;
+    FILE *fp = fopen("accounts.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
+
+    if (!fp || !temp) {
+        printf("❌ Error opening files.\n");
+        return;
+    }
+
+    printf("Enter Account Number to delete: ");
+    scanf("%d", &accNo);
+
+    while (fread(&b, sizeof(b), 1, fp)) {
+        if (b.accNo != accNo) {
+            fwrite(&b, sizeof(b), 1, temp);
+        } else {
+            found = 1;
+        }
+    }
+
+    fclose(fp);
+    fclose(temp);
+
+    remove("accounts.dat");
+    rename("temp.dat", "accounts.dat");
+
+    if (found)
+        printf("✅ Account deleted successfully.\n");
+    else
+        printf("❌ Account not found.\n");
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n----- Simple Banking System Menu -----\n");
+        printf("1. Create Account\n2. View Accounts\n3. Search Account\n4. Deposit\n5. Withdraw\n6. Delete Account\n7. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: createAccount(); break;
+            case 2: viewAccounts(); break;
+            case 3: searchAccount(); break;
+            case 4: depositAmount(); break;
+            case 5: withdrawAmount(); break;
+            case 6: deleteAccount(); break;
+            case 7: printf("👋 Exiting...\n"); exit(0);
+            default: printf("❌ Invalid choice. Try again.\n");
+        }
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips
+- All account data is stored in `accounts.dat`  
+- Use consistent account numbers to avoid confusion  
+- You can extend this to include login, interest calculation, and transaction history  
+--------------------------------------------------------------------------------------------------------------

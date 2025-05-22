@@ -1,0 +1,103 @@
+# Quiz Game (with Multiple-Choice Questions) – C Program
+--------------------------------------------------------------------------------------------------------------
+This C program is a simple quiz game that asks the user multiple-choice questions and keeps score.  
+It’s perfect for beginners learning conditional statements, loops, arrays, and basic input/output in C.  
+--------------------------------------------------------------------------------------------------------------
+
+# FEATURES
+1. Asks a series of MCQ questions  
+2. Accepts answers and checks correctness  
+3. Displays final score  
+4. Easy to extend with more questions  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS
+1. Copy the code into a file named `quiz_game.c`  
+2. Compile it using a C compiler (e.g., `gcc quiz_game.c -o quiz_game`)  
+3. Run the program using `./quiz_game` or `quiz_game.exe`  
+4. Answer the questions by entering the option (A, B, C, D)  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE
+#include <stdio.h>
+#include <ctype.h>
+
+struct Question {
+    char question[256];
+    char options[4][100];
+    char correctOption;
+};
+
+int main() {
+    struct Question quiz[] = {
+        {
+            "What is the capital of France?",
+            { "A. Paris", "B. London", "C. Rome", "D. Berlin" },
+            'A'
+        },
+        {
+            "Which language is used for system programming?",
+            { "A. HTML", "B. Python", "C. C", "D. Java" },
+            'C'
+        },
+        {
+            "Who is the father of C Language?",
+            { "A. Dennis Ritchie", "B. Bjarne Stroustrup", "C. James Gosling", "D. Guido van Rossum" },
+            'A'
+        },
+        {
+            "What is the value of PI (approx)?",
+            { "A. 3.12", "B. 3.14", "C. 3.18", "D. 3.20" },
+            'B'
+        },
+        {
+            "Which of the following is a loop structure in C?",
+            { "A. if", "B. switch", "C. while", "D. goto" },
+            'C'
+        }
+    };
+
+    int totalQuestions = sizeof(quiz) / sizeof(quiz[0]);
+    int score = 0;
+    char answer;
+
+    printf("\n📘 Welcome to the C Quiz Game!\n");
+    printf("Enter the correct option (A/B/C/D) for each question.\n\n");
+
+    for (int i = 0; i < totalQuestions; i++) {
+        printf("Q%d: %s\n", i + 1, quiz[i].question);
+        for (int j = 0; j < 4; j++) {
+            printf("%s\n", quiz[i].options[j]);
+        }
+
+        printf("Your answer: ");
+        scanf(" %c", &answer);
+        answer = toupper(answer);
+
+        if (answer == quiz[i].correctOption) {
+            printf("✅ Correct!\n\n");
+            score++;
+        } else {
+            printf("❌ Wrong! Correct answer: %c\n\n", quiz[i].correctOption);
+        }
+    }
+
+    printf("🎉 Quiz Completed! Your Score: %d/%d\n", score, totalQuestions);
+
+    if (score == totalQuestions) {
+        printf("🏆 Excellent! You got all answers right!\n");
+    } else if (score >= totalQuestions / 2) {
+        printf("👍 Good job! Keep practicing.\n");
+    } else {
+        printf("📘 Keep learning! Try again.\n");
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips
+- Questions can be added easily by appending to the `quiz[]` array  
+- You can add a timer, difficulty levels, or categories for more engagement  
+- To handle hundreds of questions, use file reading or a database  
+--------------------------------------------------------------------------------------------------------------

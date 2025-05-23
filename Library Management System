@@ -1,0 +1,196 @@
+# Library Management System – C Program
+--------------------------------------------------------------------------------------------------------------
+This C program manages a basic library system using structures and file handling.  
+It allows adding, viewing, searching, updating, and deleting books from a persistent file storage.  
+Ideal for learning file I/O, structures, and menu-based programs in C.  
+--------------------------------------------------------------------------------------------------------------
+
+# FEATURES
+1. Add New Book  
+2. View All Books  
+3. Search Book by ID  
+4. Update Book by ID  
+5. Delete Book by ID  
+6. Exit  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS
+1. Save the code as `library_system.c`  
+2. Compile it with a C compiler (e.g., `gcc library_system.c -o library_system`)  
+3. Run the executable (`./library_system` or `library_system.exe`)  
+4. Manage your book records via the menu  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Book {
+    int id;
+    char title[100];
+    char author[100];
+    int quantity;
+};
+
+void addBook() {
+    struct Book b;
+    FILE *fp = fopen("library.dat", "ab");
+
+    printf("Enter Book ID: ");
+    scanf("%d", &b.id);
+    printf("Enter Book Title: ");
+    scanf(" %[^\n]", b.title);
+    printf("Enter Author Name: ");
+    scanf(" %[^\n]", b.author);
+    printf("Enter Quantity: ");
+    scanf("%d", &b.quantity);
+
+    fwrite(&b, sizeof(b), 1, fp);
+    fclose(fp);
+
+    printf("✅ Book added successfully!\n");
+}
+
+void viewBooks() {
+    struct Book b;
+    FILE *fp = fopen("library.dat", "rb");
+
+    if (!fp) {
+        printf("❌ No books found.\n");
+        return;
+    }
+
+    printf("\n📚 All Books in Library:\n");
+    while (fread(&b, sizeof(b), 1, fp)) {
+        printf("ID: %d\tTitle: %s\tAuthor: %s\tQuantity: %d\n", b.id, b.title, b.author, b.quantity);
+    }
+
+    fclose(fp);
+}
+
+void searchBook() {
+    int id, found = 0;
+    struct Book b;
+    FILE *fp = fopen("library.dat", "rb");
+
+    printf("Enter Book ID to search: ");
+    scanf("%d", &id);
+
+    while (fread(&b, sizeof(b), 1, fp)) {
+        if (b.id == id) {
+            printf("✅ Book Found:\n");
+            printf("ID: %d\tTitle: %s\tAuthor: %s\tQuantity: %d\n", b.id, b.title, b.author, b.quantity);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("❌ Book not found.\n");
+    }
+
+    fclose(fp);
+}
+
+void updateBook() {
+    int id, found = 0;
+    struct Book b;
+    FILE *fp = fopen("library.dat", "rb+");
+
+    if (!fp) {
+        printf("❌ File error.\n");
+        return;
+    }
+
+    printf("Enter Book ID to update: ");
+    scanf("%d", &id);
+
+    while (fread(&b, sizeof(b), 1, fp)) {
+        if (b.id == id) {
+            printf("Enter new title: ");
+            scanf(" %[^\n]", b.title);
+            printf("Enter new author: ");
+            scanf(" %[^\n]", b.author);
+            printf("Enter new quantity: ");
+            scanf("%d", &b.quantity);
+
+            fseek(fp, -sizeof(b), SEEK_CUR);
+            fwrite(&b, sizeof(b), 1, fp);
+
+            printf("✅ Book updated successfully!\n");
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("❌ Book not found.\n");
+    }
+
+    fclose(fp);
+}
+
+void deleteBook() {
+    int id, found = 0;
+    struct Book b;
+    FILE *fp = fopen("library.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
+
+    if (!fp || !temp) {
+        printf("❌ Error opening files.\n");
+        return;
+    }
+
+    printf("Enter Book ID to delete: ");
+    scanf("%d", &id);
+
+    while (fread(&b, sizeof(b), 1, fp)) {
+        if (b.id != id) {
+            fwrite(&b, sizeof(b), 1, temp);
+        } else {
+            found = 1;
+        }
+    }
+
+    fclose(fp);
+    fclose(temp);
+
+    remove("library.dat");
+    rename("temp.dat", "library.dat");
+
+    if (found)
+        printf("✅ Book deleted successfully.\n");
+    else
+        printf("❌ Book not found.\n");
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n📘 Library Management Menu:\n");
+        printf("1. Add Book\n2. View All Books\n3. Search Book\n4. Update Book\n5. Delete Book\n6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: addBook(); break;
+            case 2: viewBooks(); break;
+            case 3: searchBook(); break;
+            case 4: updateBook(); break;
+            case 5: deleteBook(); break;
+            case 6: printf("👋 Exiting...\n"); exit(0);
+            default: printf("❌ Invalid choice. Try again.\n");
+        }
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips
+- All book records are stored in `library.dat`  
+- You can add more features like due dates, student info, and book issuing logs  
+- Great base for upgrading to database-backed systems later (MySQL, SQLite, etc.)  
+--------------------------------------------------------------------------------------------------------------

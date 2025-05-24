@@ -1,0 +1,54 @@
+# Alarm Clock  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script functions as a simple **alarm clock**.  
+You can set a target time, and when the time matches, the script will **play a sound or show a pop-up message**.  
+Perfect for reminding you of breaks, study sessions, or anything else.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`alarm_clock.bat`)  
+4. Run `alarm_clock.bat`  
+5. Enter the desired alarm time in 24-hour format (e.g., 14:30 for 2:30 PM)  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Alarm Clock  
+cls  
+
+echo ===================================  
+echo           ALARM CLOCK  
+echo ===================================  
+set /p alarmTime=Enter alarm time (HH:MM, 24-hour format):  
+
+:waitLoop  
+for /f "tokens=1-2 delims=:" %%a in ("%time%") do (  
+    set hour=%%a  
+    set minute=%%b  
+)  
+
+set curTime=%hour%:%minute%  
+
+if "%curTime%"=="%alarmTime%" goto alarm  
+timeout /t 30 >nul  
+goto waitLoop  
+
+:alarm  
+:: You can replace msg with start "" "sound.wav" to play a sound instead  
+msg * "⏰ Time's up! This is your alarm notification!"  
+echo Alarm triggered at %alarmTime%  
+pause  
+exit  
+
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Run the script and enter the alarm time in **24-hour format** (e.g., `18:45` for 6:45 PM).  
+2. The script checks the system time every 30 seconds.  
+3. When the current time matches, it **displays a message pop-up**.  
+4. You can replace `msg` with `start "" "sound.wav"` to **play a sound file** instead.  
+5. Make sure to put the sound file in the same folder and name it accordingly.  
+
+--------------------------------------------------------------------------------------------------------------

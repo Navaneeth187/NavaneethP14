@@ -1,0 +1,70 @@
+# Number Guessing Game – C Program
+--------------------------------------------------------------------------------------------------------------
+This C program is a fun number guessing game. The computer randomly picks a number,  
+and the user must guess it. Helpful hints are provided ("Too High" / "Too Low") until the correct number is guessed.  
+Great for practicing loops, conditionals, and random number generation in C.  
+--------------------------------------------------------------------------------------------------------------
+
+# FEATURES
+1. Random number generation  
+2. Repeated guessing with hints  
+3. Tracks number of attempts  
+4. Option to play again  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS
+1. Save the code as `guess_game.c`  
+2. Compile it using a C compiler (e.g., `gcc guess_game.c -o guess_game`)  
+3. Run the program (`./guess_game` or `guess_game.exe`)  
+4. Try to guess the number chosen by the computer!  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int number, guess, attempts;
+    char playAgain;
+
+    srand(time(0)); // Initialize random seed
+
+    do {
+        number = rand() % 100 + 1; // Random number between 1 and 100
+        attempts = 0;
+
+        printf("\n🎯 Welcome to the Number Guessing Game!\n");
+        printf("I have picked a number between 1 and 100.\n");
+        printf("Can you guess it?\n");
+
+        do {
+            printf("Enter your guess: ");
+            scanf("%d", &guess);
+            attempts++;
+
+            if (guess > number) {
+                printf("📉 Too high! Try again.\n");
+            } else if (guess < number) {
+                printf("📈 Too low! Try again.\n");
+            } else {
+                printf("✅ Congratulations! You guessed it in %d attempts!\n", attempts);
+            }
+        } while (guess != number);
+
+        printf("🎮 Do you want to play again? (Y/N): ");
+        scanf(" %c", &playAgain);
+
+    } while (playAgain == 'Y' || playAgain == 'y');
+
+    printf("👋 Thanks for playing! Goodbye.\n");
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips
+- You can increase the difficulty by changing the range (e.g., 1 to 500)  
+- Add a high score tracker by storing minimum attempts  
+- Great project for converting into a GUI or web-based game later  
+--------------------------------------------------------------------------------------------------------------

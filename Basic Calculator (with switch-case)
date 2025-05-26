@@ -1,0 +1,74 @@
+# Basic Calculator (with switch-case) – C Program
+--------------------------------------------------------------------------------------------------------------
+This C program functions as a simple calculator that performs addition, subtraction,  
+multiplication, division, and modulus using a switch-case statement.  
+It demonstrates user input, basic arithmetic operations, and control flow in C.  
+--------------------------------------------------------------------------------------------------------------
+
+# FEATURES
+1. Addition (+)  
+2. Subtraction (−)  
+3. Multiplication (×)  
+4. Division (÷)  
+5. Modulus (%)  
+--------------------------------------------------------------------------------------------------------------
+
+# STEPS
+1. Save the code as `calculator.c`  
+2. Compile it using a C compiler (e.g., `gcc calculator.c -o calculator`)  
+3. Run the program (`./calculator` or `calculator.exe`)  
+4. Enter two numbers and select an operator  
+--------------------------------------------------------------------------------------------------------------
+
+# CODE
+#include <stdio.h>
+
+int main() {
+    double num1, num2;
+    char op;
+
+    printf("🧮 Basic Calculator\n");
+    printf("Enter first number: ");
+    scanf("%lf", &num1);
+
+    printf("Enter an operator (+, -, *, /, %%): ");
+    scanf(" %c", &op); // Note the space before %c to capture any leftover newline
+
+    printf("Enter second number: ");
+    scanf("%lf", &num2);
+
+    switch(op) {
+        case '+':
+            printf("Result: %.2lf + %.2lf = %.2lf\n", num1, num2, num1 + num2);
+            break;
+        case '-':
+            printf("Result: %.2lf - %.2lf = %.2lf\n", num1, num2, num1 - num2);
+            break;
+        case '*':
+            printf("Result: %.2lf * %.2lf = %.2lf\n", num1, num2, num1 * num2);
+            break;
+        case '/':
+            if (num2 != 0)
+                printf("Result: %.2lf / %.2lf = %.2lf\n", num1, num2, num1 / num2);
+            else
+                printf("❌ Error: Division by zero is undefined.\n");
+            break;
+        case '%':
+            if ((int)num2 != 0)
+                printf("Result: %d %% %d = %d\n", (int)num1, (int)num2, (int)num1 % (int)num2);
+            else
+                printf("❌ Error: Modulus by zero is undefined.\n");
+            break;
+        default:
+            printf("❌ Invalid operator.\n");
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+
+# Usage Tips
+- Ensure valid input to avoid division/modulus by zero  
+- Try wrapping this in a loop to perform multiple calculations  
+- You can later extend it to support power, square root, or scientific functions  
+--------------------------------------------------------------------------------------------------------------

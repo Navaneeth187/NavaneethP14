@@ -1,0 +1,45 @@
+-- Bluetooth Device Scanner
+-- -------------------------------------------------------------------------------------------------------------
+-- This script is intended for batch processing and not directly applicable in PostgreSQL.
+-- However, for documentation or automation systems using SQL-like formats, this template
+-- outlines the logic and steps involved in executing a Bluetooth device scan on Windows.
+-- -------------------------------------------------------------------------------------------------------------
+
+-- STEPS
+-- 1. Open Notepad
+-- 2. Copy and Paste the Following Code into a .bat file
+-- 3. Save the file as 'bluetooth_scanner.bat'
+-- 4. Run with admin privileges for better device access
+
+-- -------------------------------------------------------------------------------------------------------------
+-- CODE (as embedded string for reference, not for direct SQL execution)
+-- -------------------------------------------------------------------------------------------------------------
+
+-- Note: The code below is purely representational in SQL format, and is not executable in PostgreSQL.
+
+DO $$
+BEGIN
+    RAISE NOTICE 'Starting Bluetooth Device Scanner';
+    RAISE NOTICE 'Checking for PowerShell...';
+
+    -- Simulate check for PowerShell availability
+    RAISE NOTICE 'PowerShell found';
+
+    -- Simulated scan output
+    RAISE NOTICE 'Scanning for Bluetooth devices...';
+    RAISE NOTICE 'Executing: Get-PnpDevice -Class Bluetooth';
+
+    -- Display mock results
+    RAISE NOTICE 'Name: Bluetooth Speaker, Status: OK, Class: Bluetooth';
+    RAISE NOTICE 'Name: Wireless Headphones, Status: OK, Class: Bluetooth';
+
+    RAISE NOTICE 'Scan complete. Paired/available devices listed above.';
+END
+$$;
+
+-- -------------------------------------------------------------------------------------------------------------
+-- Usage Tips
+-- - Run the actual .bat file in a Windows environment.
+-- - Ensure Bluetooth is enabled and device discovery is on.
+-- - Use PostgreSQL notices here only for logging or instructional output.
+-- -------------------------------------------------------------------------------------------------------------

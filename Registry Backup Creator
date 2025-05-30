@@ -1,0 +1,61 @@
+# Registry Backup Creator  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script helps **create a full backup of the Windows Registry**, which is critical before making  
+**system tweaks, installations, or edits** that could affect the system’s stability.  
+It automatically saves the backup file with a timestamp for easy reference and restoration.  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Save the File as a Batch File (`reg_backup.bat`)  
+4. Run `reg_backup.bat` as Administrator  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Registry Backup Creator  
+cls  
+
+echo ===================================  
+echo      WINDOWS REGISTRY BACKUP  
+echo ===================================  
+echo Creating Registry Backup...  
+echo.  
+
+:: Set backup directory and file name with timestamp  
+set "backupDir=%SystemDrive%\RegistryBackups"  
+set "timestamp=%date:~10,4%-%date:~4,2%-%date:~7,2%_%time:~0,2%%time:~3,2%"  
+set "backupFile=RegBackup_%timestamp%.reg"  
+
+:: Create backup directory if it doesn't exist  
+if not exist "%backupDir%" (  
+    mkdir "%backupDir%"  
+)  
+
+:: Export entire registry  
+reg export HKLM "%backupDir%\%backupFile%" /y  
+
+if %errorlevel% equ 0 (  
+    echo Registry successfully backed up to:  
+    echo %backupDir%\%backupFile%  
+) else (  
+    echo ERROR: Failed to create registry backup!  
+)  
+
+echo.  
+echo ===================================  
+echo Backup complete! Press any key to exit...  
+pause >nul  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. Always **run `reg_backup.bat` as Administrator** to ensure access to full registry keys.  
+2. The backup will be saved in `C:\RegistryBackups` with a timestamped `.reg` filename.  
+3. To **restore** a backup, double-click the `.reg` file and allow it to merge with the Registry.  
+4. Ideal before making:  
+   - System configuration changes  
+   - Manual registry edits  
+   - Software installations that affect the registry  
+
+--------------------------------------------------------------------------------------------------------------

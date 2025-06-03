@@ -1,0 +1,62 @@
+# Email Sender via Command Line  
+-------------------------------------------------------------------------------------------------------------  
+This Batch File script leverages **PowerShell** to send an email via SMTP.  
+Ideal for use in **automation scripts**, **system alerts**, or **daily summaries**.  
+Requires a working SMTP server (like Gmail, Outlook, or custom SMTP).  
+--------------------------------------------------------------------------------------------------------------  
+
+# STEPS  
+1. Open Notepad  
+2. Copy and Paste the Following Code  
+3. Replace the placeholders with your actual SMTP and login details  
+4. Save the File as a Batch File (`sendmail.bat`)  
+5. Run `sendmail.bat` normally or through a scheduled task  
+--------------------------------------------------------------------------------------------------------------  
+
+# CODE  
+@echo off  
+title Email Sender via PowerShell  
+cls  
+
+echo ===================================  
+echo      COMMAND LINE EMAIL SENDER  
+echo ===================================  
+echo Sending Email...  
+
+:: Define email content and use PowerShell to send it  
+powershell -Command "  
+$smtpServer = 'smtp.yourprovider.com';  
+$smtpPort = 587;  
+$from = 'your-email@example.com';  
+$to = 'recipient@example.com';  
+$subject = 'Daily Report';  
+$body = 'This is an automated email sent via command line.';  
+$username = 'your-email@example.com';  
+$password = ConvertTo-SecureString 'your-password' -AsPlainText -Force;  
+$cred = New-Object System.Management.Automation.PSCredential($username, $password);  
+Send-MailMessage -To $to -From $from -Subject $subject -Body $body -SmtpServer $smtpServer -Port $smtpPort -UseSsl -Credential $cred  
+"  
+
+if %errorlevel% equ 0 (  
+    echo Email sent successfully!  
+) else (  
+    echo ERROR: Failed to send email.  
+)  
+
+echo.  
+echo ===================================  
+echo Operation complete. Press any key to exit...  
+pause >nul  
+--------------------------------------------------------------------------------------------------------------  
+
+# Usage Tips  
+1. **Replace** the placeholders like `your-email@example.com`, `smtp.yourprovider.com`, and password.  
+2. Ensure **PowerShell execution policy** allows script execution (`Set-ExecutionPolicy RemoteSigned` if needed).  
+3. Enable **"less secure apps"** in your email provider settings if required (not recommended for production).  
+4. Can be scheduled with **Task Scheduler** for automatic daily email dispatches.  
+5. Works great for sending:  
+   - Backup logs  
+   - System status reports  
+   - Custom alerts  
+
+--------------------------------------------------------------------------------------------------------------
